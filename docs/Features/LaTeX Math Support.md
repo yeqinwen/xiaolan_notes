@@ -1,4 +1,4 @@
-# LaTeX Math Support
+# 1 LaTeX Math Support
 
 LaTeX math is supported using MathJax.
 
@@ -17,3 +17,8 @@ gives
 $$
 F(x) = \int^a_b \frac{1}{2}x^4
 $$
+
+mynotes
+
+
+我添加的

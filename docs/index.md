@@ -1,4 +1,4 @@
-# 1 Obsidian Notes
+# 1 小蓝学习笔记
 
 Publish your public notes with MkDocs
 

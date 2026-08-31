@@ -1,4 +1,4 @@
-# Publish your Obsidian Notes
+# 1 Publish your Obsidian Notes
 
 
 https://yeqinwen.github.io/xiaolan_notes/
@@ -17,7 +17,7 @@ With this template, you get these **out-of-the-box**:
 - Toggle between light and dark mode
 - Blog folder
 
-## Quick start
+## 1.1 Quick start
 
 1. Create a **new github repository using this template**. Click the green button at the top or use [this link](https://github.com/jobindjohn/obsidian-publish-mkdocs/generate). 
 
@@ -35,9 +35,9 @@ With this template, you get these **out-of-the-box**:
 
 **Not working for you?** Open an [issue](https://github.com/jobindjohn/obsidian-publish-mkdocs/issues/new/choose) and let me know what went wrong.
 
-## Configuring your website
+## 1.2 Configuring your website
 
-### How do I arrange notes as sections and pages?
+### 1.2.1 How do I arrange notes as sections and pages?
 
 By default, the sections and pages will follow the folder structure within `/docs`. The folders and sub-folders will show up as sections. Try not to have white spaces in your folder and file names, as these will be converted to HTML links. The webpage heading will be the same as the first-level heading in the markdown note.
 
@@ -45,7 +45,7 @@ By default, the sections and pages will follow the folder structure within `/doc
     - For example, see the setup for [the Blue Book](https://lyz-code.github.io/blue-book/) at [github](https://github.com/lyz-code/blue-book/blob/master/mkdocs.yml). Managing each page using `nav` can become cumbersome as the number of notes increase though!
 - The Materials theme provides multiple options to arrange [sections](https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#navigation-sections), use [navigation tabs](https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#navigation-tabs), and many other helpful [navigation setups](https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/)
 
-## Alternatives
+## 1.3 Alternatives
 
 - [binyamin/eleventy-garden: :seedling: A starter site for building a mind garden with eleventy](https://github.com/binyamin/eleventy-garden)
 - [datopian/obsidian-flowershow](https://github.com/datopian/obsidian-flowershow): plugin for publishing with flowershow direct from your obsidian vault.
@@ -56,7 +56,7 @@ By default, the sections and pages will follow the folder structure within `/doc
 - [KosmosisDire/obsidian-webpage-export](https://github.com/KosmosisDire/obsidian-webpage-export): Webpage HTML Export lets you export single files or whole vaults as HTML websites or documents. It is similar to publish, but you get direct access to the exported HTML.
 - [Enveloppe/obsidian-enveloppe: publish your notes on a GitHub repository from Obsidian Vault](https://github.com/Enveloppe/obsidian-enveloppe)
 
-## Other interesting projects
+## 1.4 Other interesting projects
 
 - [mathieudutour/gatsby-digital-garden: digital garden with Gatsby](https://github.com/mathieudutour/gatsby-digital-garden)
 - [TuanManhCao/digital-garden: Free Obisidian Publish alternative](https://github.com/TuanManhCao/digital-garden)

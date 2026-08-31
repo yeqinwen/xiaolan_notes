@@ -1,6 +1,8 @@
 # 1 小蓝学习笔记
 
-Publish your public notes with MkDocs
+
+2026-8-31
+这是小蓝构建第一个网页笔记
 
 ## 1.1 Hello World!
 

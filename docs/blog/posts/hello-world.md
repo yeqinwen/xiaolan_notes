@@ -11,8 +11,6 @@ tags:
 ---
 
 
-
-
 # 1 Hello World Blogpost
 
 Blog excerpt here

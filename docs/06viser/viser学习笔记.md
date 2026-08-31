@@ -2,5 +2,5 @@
 我添加的笔记
 
 
-![](Pasted%20image%2020260831230806.png)
+![](assets/Pasted%20image%2020260831230806.png)
 

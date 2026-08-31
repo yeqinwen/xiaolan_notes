@@ -1,5 +1,8 @@
 # Publish your Obsidian Notes
 
+
+https://yeqinwen.github.io/xiaolan_notes/
+
 MkDocs template [![Built with Material for MkDocs](https://img.shields.io/badge/Material_for_MkDocs-526CFE?style=for-the-badge&logo=MaterialForMkDocs&logoColor=white)](https://squidfunk.github.io/mkdocs-material/)
 
 Would you like to take _some_ of your notes in [Obsidian](https://obsidian.md/) and make it public?

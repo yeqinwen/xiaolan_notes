@@ -8,5 +8,3 @@ obsidian+github+MkDocs
 2. 使用git插件同步到github
 3. 使用MkDocs将github项目发布为网页
 
-
-我修改的

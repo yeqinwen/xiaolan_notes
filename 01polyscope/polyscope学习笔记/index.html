@@ -1,0 +1,1977 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../../02libigl/libigl%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+      
+      
+        
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Polyscope学习笔记 - obsidian-mkdocs template</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-polyscope" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="obsidian-mkdocs template" class="md-header__button md-logo" aria-label="obsidian-mkdocs template" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            obsidian-mkdocs template
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Polyscope学习笔记
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="obsidian-mkdocs template" class="md-nav__button md-logo" aria-label="obsidian-mkdocs template" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    obsidian-mkdocs template
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 小蓝学习笔记
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01polyscope
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    01polyscope
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Polyscope学习笔记
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Polyscope学习笔记
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-polyscope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 polyscope常用可视化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 polyscope常用可视化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 可视化mesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 可视化点云
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 可视化线框
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 读写mesh
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 读写mesh">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-pythonmesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 python读写mesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-libiglmesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 libigl读写mesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-trimeshmesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 trimesh读写mesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-openmeshmesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 openmesh读写mesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-pymeshlabmesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 pymeshlab读写mesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-gpytoolboxmesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 gpytoolbox读写mesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 视角设置
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 视角设置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 初始可视化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 获取视角参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 加载保存的视角参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 直接设置视角参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 常用视角
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02libigl
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    02libigl
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02libigl/libigl%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Libigl学习笔记
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03trimesh
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    03trimesh
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03trimesh/trimesh%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trimesh学习笔记
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04pymeshlab
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    04pymeshlab
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04pymeshlab/pymeshlab%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pymeshlab学习笔记
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05openmesh
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    05openmesh
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05openmesh/openmesh%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Openmesh学习笔记
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06viser
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    06viser
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06viser/viser%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Viser学习笔记
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-polyscope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 polyscope常用可视化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 polyscope常用可视化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 可视化mesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 可视化点云
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 可视化线框
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-mesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 读写mesh
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 读写mesh">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-pythonmesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 python读写mesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-libiglmesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 libigl读写mesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-trimeshmesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 trimesh读写mesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-openmeshmesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 openmesh读写mesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-pymeshlabmesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 pymeshlab读写mesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-gpytoolboxmesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 gpytoolbox读写mesh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 视角设置
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 视角设置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 初始可视化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 获取视角参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 加载保存的视角参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 直接设置视角参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 常用视角
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Polyscope学习笔记</h1>
+
+<h2 id="1-polyscope">1 polyscope常用可视化<a class="headerlink" href="#1-polyscope" title="Permanent link">&para;</a></h2>
+<h3 id="11-mesh">1.1 可视化mesh<a class="headerlink" href="#11-mesh" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">igl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polyscope</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ps</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">v</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="n">igl</span><span class="o">.</span><span class="n">read_triangle_mesh</span><span class="p">(</span><span class="s2">"assets/bunny.obj"</span><span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">register_surface_mesh</span><span class="p">(</span><span class="s2">"mesh"</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span><span class="n">f</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span>
+                         <span class="n">edge_width</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                         <span class="n">edge_color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                         <span class="n">smooth_shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="c1"># material="flat"</span>
+                         <span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">set_view_projection_mode</span><span class="p">(</span><span class="s2">"perspective"</span><span class="p">)</span>  <span class="c1"># orthographic 正交投影   perspective 透视投影</span>
+<span class="c1"># ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_ground_plane_mode</span><span class="p">(</span><span class="s2">"shadow_only"</span><span class="p">)</span>  <span class="c1"># ['none','tile','tile_reflection','shadow_only']</span>
+<span class="c1"># ps.set_ground_plane_height(-0.001)  # 设置地平面高度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_blur_iters</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影模糊程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_darkness</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影明暗程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_up_dir</span><span class="p">(</span><span class="s2">"y_up"</span><span class="p">)</span>  <span class="c1"># 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_front_dir</span><span class="p">(</span><span class="s1">'z_front'</span><span class="p">)</span>  <span class="c1"># 设置z轴正方向向前</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_SSAA_factor</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 在截图时，设置为4时，截图会更清晰</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="" src="../assets/Pasted%20image%2020260901222600.png" /></p>
+<h3 id="12">1.2 可视化点云<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">polyscope</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ps</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">"assets/bunny.txt"</span><span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">register_point_cloud</span><span class="p">(</span><span class="s2">"points"</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span>
+                        <span class="n">color</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span>
+                        <span class="n">radius</span><span class="o">=</span><span class="mf">0.003</span><span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">set_view_projection_mode</span><span class="p">(</span><span class="s2">"perspective"</span><span class="p">)</span>  <span class="c1"># orthographic 正交投影   perspective 透视投影</span>
+<span class="c1"># ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_ground_plane_mode</span><span class="p">(</span><span class="s2">"shadow_only"</span><span class="p">)</span>  <span class="c1"># ['none','tile','tile_reflection','shadow_only']</span>
+<span class="c1"># ps.set_ground_plane_height(-0.001)  # 设置地平面高度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_blur_iters</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影模糊程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_darkness</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影明暗程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_up_dir</span><span class="p">(</span><span class="s2">"y_up"</span><span class="p">)</span>  <span class="c1"># 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_front_dir</span><span class="p">(</span><span class="s1">'z_front'</span><span class="p">)</span>  <span class="c1"># 设置z轴正方向向前</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_SSAA_factor</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 在截图时，设置为4时，截图会更清晰</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="" src="../assets/Pasted%20image%2020260901222739.png" /></p>
+<h3 id="13">1.3 可视化线框<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">igl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polyscope</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ps</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">v</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="n">igl</span><span class="o">.</span><span class="n">read_triangle_mesh</span><span class="p">(</span><span class="s2">"assets/bunny.obj"</span><span class="p">)</span>
+
+<span class="n">e</span> <span class="o">=</span> <span class="n">igl</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># 获得节点 和 连接关系</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">e</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nodes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">register_surface_mesh</span><span class="p">(</span><span class="s2">"mesh"</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span><span class="n">f</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span>
+                         <span class="n">edge_width</span><span class="o">=</span><span class="mf">0.0003</span><span class="p">,</span>
+                         <span class="n">edge_color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                         <span class="n">smooth_shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="c1"># material="flat"</span>
+                         <span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">register_curve_network</span><span class="p">(</span><span class="s2">"wireframe"</span><span class="p">,</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span>
+                          <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                          <span class="n">radius</span><span class="o">=</span><span class="mf">0.001</span>
+                          <span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">set_view_projection_mode</span><span class="p">(</span><span class="s2">"perspective"</span><span class="p">)</span>  <span class="c1"># orthographic 正交投影   perspective 透视投影</span>
+<span class="c1"># ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_ground_plane_mode</span><span class="p">(</span><span class="s2">"shadow_only"</span><span class="p">)</span>  <span class="c1"># ['none','tile','tile_reflection','shadow_only']</span>
+<span class="c1"># ps.set_ground_plane_height(-0.001)  # 设置地平面高度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_blur_iters</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影模糊程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_darkness</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影明暗程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_up_dir</span><span class="p">(</span><span class="s2">"y_up"</span><span class="p">)</span>  <span class="c1"># 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_front_dir</span><span class="p">(</span><span class="s1">'z_front'</span><span class="p">)</span>  <span class="c1"># 设置z轴正方向向前</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_SSAA_factor</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 在截图时，设置为4时，截图会更清晰</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img alt="" src="../assets/Pasted%20image%2020260901222854.png" /></th>
+<th style="text-align: center;"><img alt="" src="../assets/Pasted%20image%2020260901222926.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">mesh+wireframe</td>
+<td style="text-align: center;">wireframe</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-mesh">2 读写mesh<a class="headerlink" href="#2-mesh" title="Permanent link">&para;</a></h2>
+<h3 id="21-pythonmesh">2.1 python读写mesh<a class="headerlink" href="#21-pythonmesh" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">polyscope</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ps</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">read_obj</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+    <span class="n">vertices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">faces</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'v '</span><span class="p">):</span>  <span class="c1"># 顶点</span>
+                <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">vertices</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]])</span>
+            <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'f '</span><span class="p">):</span>  <span class="c1"># 面</span>
+                <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">face</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                    <span class="c1"># 取第一个数字（顶点索引），并转换为0-based索引</span>
+                    <span class="n">idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="c1"># OBJ文件索引从1开始，转换为0-based</span>
+                    <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">face</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># 正索引减1</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1"># 处理负数索引（相对于末尾）</span>
+                        <span class="n">face</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span> <span class="o">+</span> <span class="n">idx</span><span class="p">)</span>
+                <span class="n">faces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">face</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vertices</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">faces</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">save_obj</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">faces</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">filename</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vertices</span><span class="p">:</span>
+            <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'v </span><span class="si">%f</span><span class="s1"> </span><span class="si">%f</span><span class="s1"> </span><span class="si">%f</span><span class="se">\n</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">(</span><span class="n">faces</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># Faces are 1-based, not 0-based in obj files</span>
+            <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'f </span><span class="si">%d</span><span class="s1"> </span><span class="si">%d</span><span class="s1"> </span><span class="si">%d</span><span class="se">\n</span><span class="s1">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Saved:"</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+
+<span class="c1"># 读取mesh</span>
+<span class="n">v</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="n">read_obj</span><span class="p">(</span><span class="s2">"assets/bunny.obj"</span><span class="p">)</span>
+
+<span class="c1"># 可视化mesh</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">register_surface_mesh</span><span class="p">(</span><span class="s2">"mesh"</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span><span class="n">f</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span>
+                         <span class="n">edge_width</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                         <span class="n">edge_color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                         <span class="n">smooth_shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="c1"># material="flat"</span>
+                         <span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">set_view_projection_mode</span><span class="p">(</span><span class="s2">"perspective"</span><span class="p">)</span>  <span class="c1"># orthographic 正交投影   perspective 透视投影</span>
+<span class="c1"># ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_ground_plane_mode</span><span class="p">(</span><span class="s2">"shadow_only"</span><span class="p">)</span>  <span class="c1"># ['none','tile','tile_reflection','shadow_only']</span>
+<span class="c1"># ps.set_ground_plane_height(-0.001)  # 设置地平面高度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_blur_iters</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影模糊程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_darkness</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影明暗程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_up_dir</span><span class="p">(</span><span class="s2">"y_up"</span><span class="p">)</span>  <span class="c1"># 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_front_dir</span><span class="p">(</span><span class="s1">'z_front'</span><span class="p">)</span>  <span class="c1"># 设置z轴正方向向前</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_SSAA_factor</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 在截图时，设置为4时，截图会更清晰</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 写入mesh</span>
+<span class="n">save_obj</span><span class="p">(</span><span class="s2">"assets/new_bunny_python.obj"</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="22-libiglmesh">2.2 libigl读写mesh<a class="headerlink" href="#22-libiglmesh" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">igl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polyscope</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ps</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># 读取mesh</span>
+<span class="n">v</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">igl</span><span class="o">.</span><span class="n">read_triangle_mesh</span><span class="p">(</span><span class="s2">"assets/bunny.obj"</span><span class="p">)</span>
+
+<span class="c1"># 可视化mesh</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">register_surface_mesh</span><span class="p">(</span><span class="s2">"mesh"</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span>
+                         <span class="n">edge_width</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                         <span class="n">edge_color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                         <span class="n">smooth_shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="c1"># material="flat"</span>
+                         <span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">set_view_projection_mode</span><span class="p">(</span><span class="s2">"perspective"</span><span class="p">)</span>  <span class="c1"># orthographic 正交投影   perspective 透视投影</span>
+<span class="c1"># ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_ground_plane_mode</span><span class="p">(</span><span class="s2">"shadow_only"</span><span class="p">)</span>  <span class="c1"># ['none','tile','tile_reflection','shadow_only']</span>
+<span class="c1"># ps.set_ground_plane_height(-0.001)  # 设置地平面高度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_blur_iters</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影模糊程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_darkness</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影明暗程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_up_dir</span><span class="p">(</span><span class="s2">"y_up"</span><span class="p">)</span>  <span class="c1"># 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_front_dir</span><span class="p">(</span><span class="s1">'z_front'</span><span class="p">)</span>  <span class="c1"># 设置z轴正方向向前</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_SSAA_factor</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 在截图时，设置为4时，截图会更清晰</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 写入mesh</span>
+<span class="n">igl</span><span class="o">.</span><span class="n">write_triangle_mesh</span><span class="p">(</span><span class="s2">"assets/new_bunny_igl.obj"</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="23-trimeshmesh">2.3 trimesh读写mesh<a class="headerlink" href="#23-trimeshmesh" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">trimesh</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polyscope</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ps</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># 读取mesh</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">trimesh</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"assets/bunny.obj"</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">vertices</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">faces</span>
+
+<span class="c1"># 可视化mesh</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">register_surface_mesh</span><span class="p">(</span><span class="s2">"mesh"</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span><span class="n">f</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span>
+                         <span class="n">edge_width</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                         <span class="n">edge_color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                         <span class="n">smooth_shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="c1"># material="flat"</span>
+                         <span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">set_view_projection_mode</span><span class="p">(</span><span class="s2">"perspective"</span><span class="p">)</span>  <span class="c1"># orthographic 正交投影   perspective 透视投影</span>
+<span class="c1"># ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_ground_plane_mode</span><span class="p">(</span><span class="s2">"shadow_only"</span><span class="p">)</span>  <span class="c1"># ['none','tile','tile_reflection','shadow_only']</span>
+<span class="c1"># ps.set_ground_plane_height(-0.001)  # 设置地平面高度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_blur_iters</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影模糊程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_darkness</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影明暗程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_up_dir</span><span class="p">(</span><span class="s2">"y_up"</span><span class="p">)</span>  <span class="c1"># 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_front_dir</span><span class="p">(</span><span class="s1">'z_front'</span><span class="p">)</span>  <span class="c1"># 设置z轴正方向向前</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_SSAA_factor</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 在截图时，设置为4时，截图会更清晰</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 写入mesh</span>
+<span class="n">mesh</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s2">"assets/new_bunny_trimesh.obj"</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="24-openmeshmesh">2.4 openmesh读写mesh<a class="headerlink" href="#24-openmeshmesh" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">openmesh</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">om</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polyscope</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ps</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># 读取mesh</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">read_trimesh</span><span class="p">(</span><span class="s1">'assets/bunny.obj'</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">points</span><span class="p">()</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">face_vertex_indices</span><span class="p">()</span>
+
+<span class="c1"># 可视化mesh</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">register_surface_mesh</span><span class="p">(</span><span class="s2">"mesh"</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span><span class="n">f</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span>
+                         <span class="n">edge_width</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                         <span class="n">edge_color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                         <span class="n">smooth_shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="c1"># material="flat"</span>
+                         <span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">set_view_projection_mode</span><span class="p">(</span><span class="s2">"perspective"</span><span class="p">)</span>  <span class="c1"># orthographic 正交投影   perspective 透视投影</span>
+<span class="c1"># ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_ground_plane_mode</span><span class="p">(</span><span class="s2">"shadow_only"</span><span class="p">)</span>  <span class="c1"># ['none','tile','tile_reflection','shadow_only']</span>
+<span class="c1"># ps.set_ground_plane_height(-0.001)  # 设置地平面高度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_blur_iters</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影模糊程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_darkness</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影明暗程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_up_dir</span><span class="p">(</span><span class="s2">"y_up"</span><span class="p">)</span>  <span class="c1"># 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_front_dir</span><span class="p">(</span><span class="s1">'z_front'</span><span class="p">)</span>  <span class="c1"># 设置z轴正方向向前</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_SSAA_factor</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 在截图时，设置为4时，截图会更清晰</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 写入mesh</span>
+<span class="n">om</span><span class="o">.</span><span class="n">write_mesh</span><span class="p">(</span><span class="s2">"assets/new_bunny_openmesh.obj"</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="25-pymeshlabmesh">2.5 pymeshlab读写mesh<a class="headerlink" href="#25-pymeshlabmesh" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pymeshlab</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polyscope</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ps</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># 读取mesh</span>
+<span class="n">ms</span> <span class="o">=</span> <span class="n">pymeshlab</span><span class="o">.</span><span class="n">MeshSet</span><span class="p">()</span>
+<span class="n">ms</span><span class="o">.</span><span class="n">load_new_mesh</span><span class="p">(</span><span class="s2">"assets/bunny.obj"</span><span class="p">)</span>
+
+<span class="c1"># 可视化方法1(pymeshlab已经集成了polyscope)</span>
+<span class="c1"># ms.show_polyscope()</span>
+
+
+<span class="c1"># 可视化方法2</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">ms</span><span class="o">.</span><span class="n">current_mesh</span><span class="p">()</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">vertex_matrix</span><span class="p">()</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">face_matrix</span><span class="p">()</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">register_surface_mesh</span><span class="p">(</span><span class="s2">"mesh"</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span>
+                         <span class="n">edge_width</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                         <span class="n">edge_color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                         <span class="n">smooth_shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="c1"># material="flat"</span>
+                         <span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">set_view_projection_mode</span><span class="p">(</span><span class="s2">"perspective"</span><span class="p">)</span>  <span class="c1"># orthographic 正交投影   perspective 透视投影</span>
+<span class="c1"># ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_ground_plane_mode</span><span class="p">(</span><span class="s2">"shadow_only"</span><span class="p">)</span>  <span class="c1"># ['none','tile','tile_reflection','shadow_only']</span>
+<span class="c1"># ps.set_ground_plane_height(-0.001)  # 设置地平面高度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_blur_iters</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影模糊程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_darkness</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影明暗程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_up_dir</span><span class="p">(</span><span class="s2">"y_up"</span><span class="p">)</span>  <span class="c1"># 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_front_dir</span><span class="p">(</span><span class="s1">'z_front'</span><span class="p">)</span>  <span class="c1"># 设置z轴正方向向前</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_SSAA_factor</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 在截图时，设置为4时，截图会更清晰</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 写入mesh</span>
+<span class="n">ms</span><span class="o">.</span><span class="n">save_current_mesh</span><span class="p">(</span><span class="s2">"assets/new_bunny_pymeshlab.obj"</span><span class="p">)</span> <span class="c1"># 不知道为什么会报错</span>
+</code></pre></div>
+<h3 id="26-gpytoolboxmesh">2.6 gpytoolbox读写mesh<a class="headerlink" href="#26-gpytoolboxmesh" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">gpytoolbox</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polyscope</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ps</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># 读取mesh</span>
+<span class="n">v</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="n">gpy</span><span class="o">.</span><span class="n">read_mesh</span><span class="p">(</span><span class="s2">"assets/bunny.obj"</span><span class="p">)</span>
+
+<span class="c1"># 可视化mesh</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">register_surface_mesh</span><span class="p">(</span><span class="s2">"mesh"</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span><span class="n">f</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span>
+                         <span class="n">edge_width</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                         <span class="n">edge_color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                         <span class="n">smooth_shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="c1"># material="flat"</span>
+                         <span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">set_view_projection_mode</span><span class="p">(</span><span class="s2">"perspective"</span><span class="p">)</span>  <span class="c1"># orthographic 正交投影   perspective 透视投影</span>
+<span class="c1"># ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_ground_plane_mode</span><span class="p">(</span><span class="s2">"shadow_only"</span><span class="p">)</span>  <span class="c1"># ['none','tile','tile_reflection','shadow_only']</span>
+<span class="c1"># ps.set_ground_plane_height(-0.001)  # 设置地平面高度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_blur_iters</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影模糊程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_darkness</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影明暗程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_up_dir</span><span class="p">(</span><span class="s2">"y_up"</span><span class="p">)</span>  <span class="c1"># 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_front_dir</span><span class="p">(</span><span class="s1">'z_front'</span><span class="p">)</span>  <span class="c1"># 设置z轴正方向向前</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_SSAA_factor</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 在截图时，设置为4时，截图会更清晰</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 写入mesh</span>
+<span class="n">gpy</span><span class="o">.</span><span class="n">write_mesh</span><span class="p">(</span><span class="s2">"assets/new_bunny_gpytoolbox.obj"</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="3">3 视角设置<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 初始可视化<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">igl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polyscope</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ps</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="n">V</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="n">igl</span><span class="o">.</span><span class="n">read_triangle_mesh</span><span class="p">(</span><span class="s2">"assets/bunny.obj"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">V</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">F</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">register_surface_mesh</span><span class="p">(</span><span class="s2">"mesh"</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span>
+                         <span class="n">edge_width</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                         <span class="n">edge_color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                         <span class="n">smooth_shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="c1"># material="flat"</span>
+                         <span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">set_view_projection_mode</span><span class="p">(</span><span class="s2">"perspective"</span><span class="p">)</span>  <span class="c1"># orthographic 正交投影   perspective 透视投影</span>
+<span class="c1"># ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_ground_plane_mode</span><span class="p">(</span><span class="s2">"shadow_only"</span><span class="p">)</span>  <span class="c1"># ['none','tile','tile_reflection','shadow_only']</span>
+<span class="c1"># ps.set_ground_plane_height(-0.001)  # 设置地平面高度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_blur_iters</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影模糊程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_darkness</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影明暗程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_up_dir</span><span class="p">(</span><span class="s2">"y_up"</span><span class="p">)</span>  <span class="c1"># 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_front_dir</span><span class="p">(</span><span class="s1">'z_front'</span><span class="p">)</span>  <span class="c1"># 设置z轴正方向向前</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_SSAA_factor</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 在截图时，设置为4时，截图会更清晰</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="" src="../assets/Pasted%20image%2020260902215855.png" /></p>
+<h3 id="32">3.2 获取视角参数<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>在可视化时，可以旋转mesh到合适的视角，然后将该视角参数保存为json文件，下次可视化时加载json参数设置视角即可</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">igl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polyscope</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ps</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="n">V</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="n">igl</span><span class="o">.</span><span class="n">read_triangle_mesh</span><span class="p">(</span><span class="s2">"assets/bunny.obj"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">V</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">F</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">register_surface_mesh</span><span class="p">(</span><span class="s2">"mesh"</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span>
+                         <span class="n">edge_width</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                         <span class="n">edge_color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                         <span class="n">smooth_shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="c1"># material="flat"</span>
+                         <span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">set_view_projection_mode</span><span class="p">(</span><span class="s2">"perspective"</span><span class="p">)</span>  <span class="c1"># orthographic 正交投影   perspective 透视投影</span>
+<span class="c1"># ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_ground_plane_mode</span><span class="p">(</span><span class="s2">"shadow_only"</span><span class="p">)</span>  <span class="c1"># ['none','tile','tile_reflection','shadow_only']</span>
+<span class="c1"># ps.set_ground_plane_height(-0.001)  # 设置地平面高度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_blur_iters</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影模糊程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_darkness</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影明暗程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_up_dir</span><span class="p">(</span><span class="s2">"y_up"</span><span class="p">)</span>  <span class="c1"># 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_front_dir</span><span class="p">(</span><span class="s1">'z_front'</span><span class="p">)</span>  <span class="c1"># 设置z轴正方向向前</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_SSAA_factor</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 在截图时，设置为4时，截图会更清晰</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="c1"># 获得视图参数，并写入json</span>
+<span class="n">my_view</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">get_view_as_json</span><span class="p">()</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'my_view.json'</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">my_view</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="" src="../assets/Pasted%20image%2020260902220102.png" /></p>
+<h3 id="33">3.3 加载保存的视角参数<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">igl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polyscope</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ps</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="n">V</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="n">igl</span><span class="o">.</span><span class="n">read_triangle_mesh</span><span class="p">(</span><span class="s2">"assets/bunny.obj"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">V</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">F</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># 读取视图json文件</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'my_view.json'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fin</span><span class="p">:</span>
+    <span class="n">my_view</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_view_from_json</span><span class="p">(</span><span class="n">my_view</span><span class="p">)</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">register_surface_mesh</span><span class="p">(</span><span class="s2">"mesh"</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span>
+                         <span class="n">edge_width</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                         <span class="n">edge_color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                         <span class="n">smooth_shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="c1"># material="flat"</span>
+                         <span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">set_view_projection_mode</span><span class="p">(</span><span class="s2">"perspective"</span><span class="p">)</span>  <span class="c1"># orthographic 正交投影   perspective 透视投影</span>
+<span class="c1"># ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_ground_plane_mode</span><span class="p">(</span><span class="s2">"shadow_only"</span><span class="p">)</span>  <span class="c1"># ['none','tile','tile_reflection','shadow_only']</span>
+<span class="c1"># ps.set_ground_plane_height(-0.001)  # 设置地平面高度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_blur_iters</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影模糊程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_darkness</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影明暗程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_up_dir</span><span class="p">(</span><span class="s2">"y_up"</span><span class="p">)</span>  <span class="c1"># 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_front_dir</span><span class="p">(</span><span class="s1">'z_front'</span><span class="p">)</span>  <span class="c1"># 设置z轴正方向向前</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_SSAA_factor</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 在截图时，设置为4时，截图会更清晰</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="" src="../assets/Pasted%20image%2020260902220229.png" /></p>
+<h3 id="34">3.4 直接设置视角参数<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
+<p>在代码内部直接设置视角参数，无需加载json文件</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">igl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polyscope</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ps</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">V</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="n">igl</span><span class="o">.</span><span class="n">read_triangle_mesh</span><span class="p">(</span><span class="s2">"assets/bunny.obj"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">V</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">my_view</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"{</span><span class="se">\"</span><span class="s2">farClipRatio</span><span class="se">\"</span><span class="s2">:20.0,</span><span class="se">\"</span><span class="s2">fov</span><span class="se">\"</span><span class="s2">:45.0,</span><span class="se">\"</span><span class="s2">nearClipRatio</span><span class="se">\"</span><span class="s2">:0.005,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">projectionMode</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Perspective</span><span class="se">\"</span><span class="s2">,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">viewMat</span><span class="se">\"</span><span class="s2">:[0.628925979137421,-0.0,0.777465164661407,0.0164333805441856,"</span>
+           <span class="s2">"0.477299362421036,0.78937029838562,-0.386108577251434,-0.0585889630019665,"</span>
+           <span class="s2">"-0.613707959651947,0.613917350769043,0.496455520391464,-0.391957879066467,"</span>
+           <span class="s2">"0.0,0.0,0.0,1.0],"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">windowHeight</span><span class="se">\"</span><span class="s2">:720,</span><span class="se">\"</span><span class="s2">windowWidth</span><span class="se">\"</span><span class="s2">:1280}"</span><span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_view_from_json</span><span class="p">(</span><span class="n">my_view</span><span class="p">)</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">register_surface_mesh</span><span class="p">(</span><span class="s2">"mesh"</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span>
+                         <span class="n">edge_width</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                         <span class="n">edge_color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                         <span class="n">smooth_shade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="c1"># material="flat"</span>
+                         <span class="p">)</span>
+
+<span class="n">ps</span><span class="o">.</span><span class="n">set_view_projection_mode</span><span class="p">(</span><span class="s2">"perspective"</span><span class="p">)</span>  <span class="c1"># orthographic 正交投影   perspective 透视投影</span>
+<span class="c1"># ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_ground_plane_mode</span><span class="p">(</span><span class="s2">"shadow_only"</span><span class="p">)</span>  <span class="c1"># ['none','tile','tile_reflection','shadow_only']</span>
+<span class="c1"># ps.set_ground_plane_height(-0.001)  # 设置地平面高度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_blur_iters</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影模糊程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_shadow_darkness</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 设置地平面阴影明暗程度</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_up_dir</span><span class="p">(</span><span class="s2">"y_up"</span><span class="p">)</span>  <span class="c1"># 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_front_dir</span><span class="p">(</span><span class="s1">'z_front'</span><span class="p">)</span>  <span class="c1"># 设置z轴正方向向前</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">set_SSAA_factor</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 在截图时，设置为4时，截图会更清晰</span>
+<span class="n">ps</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="" src="../assets/Pasted%20image%2020260902221432.png" /></p>
+<h3 id="35">3.5 常用视角<a class="headerlink" href="#35" title="Permanent link">&para;</a></h3>
+<p>常用的视角有：常用窗口、方形窗口、全屏窗口</p>
+<p><strong>注意</strong>：直接设置视角参数时，因为在 <code>my_view</code>视角参数里面已经设置了“透视投影”或“正交投影“，所以在代码里面就不要再设置了，<code>ps.set_view_projection_mode("perspective")</code>这一行要注释掉！</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 常用窗口</span>
+<span class="n">my_view</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"{</span><span class="se">\"</span><span class="s2">farClipRatio</span><span class="se">\"</span><span class="s2">:20.0,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">fov</span><span class="se">\"</span><span class="s2">:39.9119839509077,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">nearClipRatio</span><span class="se">\"</span><span class="s2">:0.005,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">projectionMode</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Orthographic</span><span class="se">\"</span><span class="s2">,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">viewMat</span><span class="se">\"</span><span class="s2">:[0.905055642127991,-4.65661287307739e-10,0.425295770168304,0.0160223785787821,"</span>
+           <span class="s2">"0.148309409618378,0.937226414680481,-0.315611660480499,-0.0960772186517715,"</span>
+           <span class="s2">"-0.398598343133926,0.348720252513885,0.848241686820984,-0.358562052249908,"</span>
+           <span class="s2">"0.0,0.0,0.0,1.0],"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">windowHeight</span><span class="se">\"</span><span class="s2">:801,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">windowWidth</span><span class="se">\"</span><span class="s2">:1293}"</span><span class="p">)</span>
+
+<span class="c1"># 方形窗口</span>
+<span class="n">my_view</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"{</span><span class="se">\"</span><span class="s2">farClipRatio</span><span class="se">\"</span><span class="s2">:20.0,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">fov</span><span class="se">\"</span><span class="s2">:35.0,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">nearClipRatio</span><span class="se">\"</span><span class="s2">:0.005,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">projectionMode</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Orthographic</span><span class="se">\"</span><span class="s2">,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">viewMat</span><span class="se">\"</span><span class="s2">:[1.0,-0.0,0.0,0.0168603006750345,"</span>
+           <span class="s2">"0.0,0.997785151004791,-0.066519021987915,-0.110035300254822,"</span>
+           <span class="s2">"-0.0,0.066519021987915,0.997785151004791,-0.320515900850296,"</span>
+           <span class="s2">"0.0,0.0,0.0,1.0],"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">windowHeight</span><span class="se">\"</span><span class="s2">:600,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">windowWidth</span><span class="se">\"</span><span class="s2">:600}"</span><span class="p">)</span>
+
+<span class="c1"># 全屏窗口</span>
+<span class="n">my_view</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"{</span><span class="se">\"</span><span class="s2">farClipRatio</span><span class="se">\"</span><span class="s2">:20.0,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">fov</span><span class="se">\"</span><span class="s2">:38.7801126847704,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">nearClipRatio</span><span class="se">\"</span><span class="s2">:0.005,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">projectionMode</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Orthographic</span><span class="se">\"</span><span class="s2">,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">viewMat</span><span class="se">\"</span><span class="s2">:[0.992455244064331,2.91038304567337e-11,0.122607305645943,0.0192149728536606,"</span>
+           <span class="s2">"0.0536937303841114,0.899007201194763,-0.434628546237946,-0.0625064224004745,"</span>
+           <span class="s2">"-0.110224828124046,0.437932759523392,0.892224311828613,-0.363460153341293,"</span>
+           <span class="s2">"0.0,0.0,0.0,1.0],"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">windowHeight</span><span class="se">\"</span><span class="s2">:1055,"</span>
+           <span class="s2">"</span><span class="se">\"</span><span class="s2">windowWidth</span><span class="se">\"</span><span class="s2">:1920}"</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">常用窗口</th>
+<th style="text-align: center;"><img alt="" src="../assets/Pasted%20image%2020260902220915.png" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">方形窗口</td>
+<td style="text-align: center;"><img alt="" src="../assets/Pasted%20image%2020260902220724.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;">全屏窗口</td>
+<td style="text-align: center;"><img alt="" src="../assets/Pasted%20image%2020260902221033.png" /></td>
+</tr>
+<tr>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"># ps.set_view_projection_mode("perspective") 这一行要 注释掉</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

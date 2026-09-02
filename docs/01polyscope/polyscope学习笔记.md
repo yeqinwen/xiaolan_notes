@@ -1,7 +1,7 @@
 
-# 1 polyscope常用可视化
+## 0.1 polyscope常用可视化
 
-## 1.1 可视化mesh
+### 0.1.1 可视化mesh
 
 ```python
 import igl
@@ -36,7 +36,7 @@ ps.show()
 
 
 
-## 1.2 可视化点云
+### 0.1.2 可视化点云
 
 ```python
 import polyscope as ps
@@ -65,7 +65,7 @@ ps.show()
 ![](assets/Pasted%20image%2020260901222739.png)
 
 
-## 1.3 可视化线框
+### 0.1.3 可视化线框
 
 
 ```python
@@ -113,11 +113,9 @@ ps.show()
 |                 mesh+wireframe                  |                    wireframe                    |
 
 
+## 0.2 读写mesh
 
-
-# 2 读写mesh
-
-## 2.1 python读写mesh
+### 0.2.1 python读写mesh
 
 ```python
 import polyscope as ps
@@ -192,7 +190,7 @@ ps.show()
 save_obj("assets/new_bunny_python.obj",v,f)
 ```
 
-## 2.2 libigl读写mesh
+### 0.2.2 libigl读写mesh
 
 ```python
 import igl
@@ -228,7 +226,7 @@ igl.write_triangle_mesh("assets/new_bunny_igl.obj", v, f)
 
 ```
 
-## 2.3 trimesh读写mesh
+### 0.2.3 trimesh读写mesh
 
 ```python
 import trimesh
@@ -266,7 +264,7 @@ mesh.export("assets/new_bunny_trimesh.obj")
 
 ```
 
-## 2.4 openmesh读写mesh
+### 0.2.4 openmesh读写mesh
 
 ```python
 import openmesh as om
@@ -303,7 +301,7 @@ ps.show()
 om.write_mesh("assets/new_bunny_openmesh.obj", mesh)
 ```
 
-## 2.5 pymeshlab读写mesh
+### 0.2.5 pymeshlab读写mesh
 
 ```python
 import pymeshlab
@@ -347,7 +345,7 @@ ps.show()
 ms.save_current_mesh("assets/new_bunny_pymeshlab.obj") # 不知道为什么会报错
 ```
 
-## 2.6 gpytoolbox读写mesh
+### 0.2.6 gpytoolbox读写mesh
 
 ```python
 import gpytoolbox as gpy

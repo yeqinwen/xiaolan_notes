@@ -1511,6 +1511,12 @@ add_color_quantity的texture是一张rgb图，形状为(height,width,3)
 
 #### 7.5.1 使用vertices法为smpl添加纹理
 
+```
+smpl_uv.obj和f_02_alb.002.png是在SMPL官方网站上下载的
+
+https://smpl.is.tue.mpg.de/index.html
+```
+
 
 ```python
 import numpy as np

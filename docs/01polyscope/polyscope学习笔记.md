@@ -598,3 +598,402 @@ my_view = ("{\"farClipRatio\":20.0,"
 | 全屏窗口 |    ![](assets/Pasted%20image%2020260902221033.png)    |
 |      | # ps.set_view_projection_mode("perspective") 这一行要 注释掉 |
 
+## 4 颜色设置
+
+### 4.1 颜色
+
+```python
+蓝色[0, 91/255, 255/ 255]   
+黄色[255/ 255, 164/ 255, 0]   
+粉红色[255/ 255, 0, 218/ 255]   
+青色[0, 255/ 255, 37/ 255]  
+紫色[100/ 255, 0, 255/ 255] 
+草黄[155/ 255, 255/ 255, 0] 
+红色[255/ 255, 0, 27/ 255] 
+玉色[0, 255/ 255, 228/ 255] 
+深蓝[5/ 255, 0, 255/ 255]
+亮黄[255/ 255, 255/ 255, 0] 
+```
+
+
+### 4.2 默认10种颜色
+
+如果不设置颜色，使用的就是默认颜色，默认的颜色有一点暗
+
+```python
+import igl
+import numpy as np
+import polyscope as ps
+
+v, f = igl.read_triangle_mesh("assets/dress2.obj")
+
+ps.init()
+ps.register_surface_mesh("mesh1", v, f,
+                         # color=np.array([0, 91, 255]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh2", v + np.array([1000, 0, 0]), f,
+                         # color=np.array([255,164,0] ) /255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh3", v + np.array([2000, 0, 0]), f,
+                         # color=np.array([255, 0, 218]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh4", v + np.array([3000, 0, 0]), f,
+                         # color=np.array([0, 255, 37]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh5", v + np.array([4000, 0, 0]), f,
+                         # color=np.array([100, 0, 255]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh6", v + np.array([5000, 0, 0]), f,
+                         # color=np.array([155, 255, 0]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh7", v + np.array([6000, 0, 0]), f,
+                         # color=np.array([255, 0, 27]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh8", v + np.array([7000, 0, 0]), f,
+                         # color=np.array([0, 255, 228]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh9", v + np.array([8000, 0, 0]), f,
+                         # color=np.array([5, 0, 255]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh10", v + np.array([9000, 0, 0]), f,
+                         # color=np.array([255, 255, 0]) / 255,
+                         smooth_shade=True)
+
+ps.set_ground_plane_mode("shadow_only")
+# ps.set_navigation_style("planar")
+ps.set_up_dir("y_up")
+ps.set_view_projection_mode("orthographic")  # orthographic 正交投影   perspective 透视投影
+ps.set_SSAA_factor(4)
+ps.show()
+```
+
+
+![](默认10种颜色.png)
+
+### 4.3 调亮10种颜色
+
+```python
+import igl
+import numpy as np
+import polyscope as ps
+
+v, f = igl.read_triangle_mesh("assets/dress2.obj")
+
+# 调亮
+# 蓝色 [0,91,255] / 255# 黄色 [255,164,0] / 255# 粉红色 [255,0, 218 ] / 255# 青色 [0,255,37] / 255# 紫色 [100, 0, 255]/ 255# 草黄 [155,255,0] / 255# 红色 [255,0,27] / 255# 玉色 [0,255,228] / 255# 深蓝 [5,0,255] / 255# 亮黄 [255,255,0] / 255
+
+ps.init()
+ps.register_surface_mesh("mesh1", v, f,
+                         color=np.array([0, 91, 255]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh2", v + np.array([1000, 0, 0]), f,
+                         color=np.array([255, 164, 0]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh3", v + np.array([2000, 0, 0]), f,
+                         color=np.array([255, 0, 218]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh4", v + np.array([3000, 0, 0]), f,
+                         color=np.array([0, 255, 37]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh5", v + np.array([4000, 0, 0]), f,
+                         color=np.array([100, 0, 255]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh6", v + np.array([5000, 0, 0]), f,
+                         color=np.array([155, 255, 0]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh7", v + np.array([6000, 0, 0]), f,
+                         color=np.array([255, 0, 27]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh8", v + np.array([7000, 0, 0]), f,
+                         color=np.array([0, 255, 228]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh9", v + np.array([8000, 0, 0]), f,
+                         color=np.array([5, 0, 255]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh10", v + np.array([9000, 0, 0]), f,
+                         color=np.array([255, 255, 0]) / 255,
+                         smooth_shade=True)
+
+ps.set_ground_plane_mode("shadow_only")
+# ps.set_navigation_style("planar")
+ps.set_up_dir("y_up")
+ps.set_view_projection_mode("orthographic")  # orthographic 正交投影   perspective 透视投影
+ps.set_SSAA_factor(4)
+ps.show()
+```
+
+
+![](调亮10种颜色.png)
+
+
+## 5 平移、缩放、旋转
+
+### 5.1 平移
+
+```python
+import igl
+import polyscope as ps
+import numpy as np
+
+v, f = igl.read_triangle_mesh("assets/bunny.obj")
+
+v1 = v + np.array([0.1, 0, 0])
+
+ps.init()
+ps.register_surface_mesh("mesh", v, f,
+                         color=np.array([0, 91, 255]) / 255,
+                         edge_width=0.03,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+
+ps.register_surface_mesh("mesh1", v1, f,
+                         color=np.array([255, 164, 0]) / 255,
+                         edge_width=0.03,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+
+# ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 这两行有用
+ps.set_shadow_blur_iters(3)  # 模糊的程度，这个数值可以设置很大
+ps.set_shadow_darkness(0.5)  # 这个数值也可以设置很大
+ps.set_up_dir("y_up")  # 这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉
+ps.set_front_dir('z_front')  # 这两行有用
+ps.set_SSAA_factor(4)
+ps.set_open_imgui_window_for_user_callback(False)  # 用于将原始imgui的界面关掉
+ps.show()
+
+```
+
+![](Pasted%20image%2020260915155746.png)
+
+
+### 5.2 缩放
+
+```python
+import igl
+import polyscope as ps
+import numpy as np
+
+v, f = igl.read_triangle_mesh("assets/bunny.obj")
+
+v1 = v * 2
+
+ps.init()
+ps.register_surface_mesh("mesh", v, f,
+                         color=np.array([0, 91, 255]) / 255,
+                         edge_width=0.03,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+
+ps.register_surface_mesh("mesh1", v1, f,
+                         color=np.array([255, 164, 0]) / 255,
+                         edge_width=0.03,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 这两行有用
+ps.set_shadow_blur_iters(3)  # 模糊的程度，这个数值可以设置很大
+ps.set_shadow_darkness(0.5)  # 这个数值也可以设置很大
+ps.set_up_dir("y_up")  # 这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉
+ps.set_front_dir('z_front')  # 这两行有用
+ps.set_SSAA_factor(4)
+ps.set_open_imgui_window_for_user_callback(False)  # 用于将原始imgui的界面关掉
+ps.show()
+
+```
+
+
+![](Pasted%20image%2020260915155928.png)
+
+### 5.3 矩阵旋转
+
+
+```python
+import igl
+import polyscope as ps
+import numpy as np
+
+v, f = igl.read_triangle_mesh("assets/bunny.obj")
+
+# 绕轴旋转90度
+angle = 90 / 180 * np.pi
+Tx = np.array([
+    [1, 0, 0],
+    [0, np.cos(angle), np.sin(angle)],
+    [0, -np.sin(angle), np.cos(angle)],
+])
+
+Ty = np.array([
+    [np.cos(angle), 0, -np.sin(angle)],
+    [0, 1, 0],
+    [np.sin(angle), 0, np.cos(angle)],
+])
+
+Tz = np.array([
+    [np.cos(angle), np.sin(angle), 0],
+    [-np.sin(angle), np.cos(angle), 0],
+    [0, 0, 1],
+])
+
+# 将mesh中心点移动到原点
+new_v = v - v.mean(axis=0)
+
+# 旋转
+new_v_x = np.dot(new_v, Tx)
+new_v_y = np.dot(new_v, Ty)
+new_v_z = np.dot(new_v, Tz)
+
+# 旋转后，再加上中心点v.mean(axis=0)
+new_v_x = new_v_x + v.mean(axis=0)
+new_v_y = new_v_y + v.mean(axis=0)
+new_v_z = new_v_z + v.mean(axis=0)
+
+ps.init()
+ps.register_surface_mesh("mesh", v, f,
+                         color=np.array([0, 91, 255]) / 255,
+                         edge_width=0.03,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+
+ps.register_surface_mesh("mesh_x", new_v_x, f,
+                         color=np.array([255, 164, 0]) / 255,
+                         edge_width=0.03,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+
+ps.register_surface_mesh("mesh_y", new_v_y, f,
+                         color=np.array([255, 0, 218]) / 255,
+                         edge_width=0.03,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+ps.register_surface_mesh("mesh_z", new_v_z, f,
+                         color=np.array([0, 255, 37]) / 255,
+                         edge_width=0.03,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+ps.set_view_projection_mode("orthographic")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 这两行有用
+ps.set_shadow_blur_iters(3)  # 模糊的程度，这个数值可以设置很大
+ps.set_shadow_darkness(0.5)  # 这个数值也可以设置很大
+ps.set_up_dir("y_up")  # 这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉
+ps.set_front_dir('z_front')  # 这两行有用
+ps.set_SSAA_factor(4)
+ps.set_open_imgui_window_for_user_callback(False)  # 用于将原始imgui的界面关掉
+ps.show()
+
+```
+
+
+mesh是y轴正方向向上，z轴正方向指向屏幕外，x轴正方向向右
+
+| ![](Pasted%20image%2020260915160109.png) | ![](Pasted%20image%2020260915160120.png) | ![](Pasted%20image%2020260915160133.png) |
+| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+| 绕x轴旋转                                    | 绕y轴旋转                                    | 绕z轴旋转                                    |
+
+### 5.4 轴角旋转
+
+```python
+
+# 绕单一轴旋转
+new_v_x = R.from_euler('x', 90, degrees=True).apply(new_v)
+new_v_y = R.from_euler('y', 90, degrees=True).apply(new_v)
+new_v_z = R.from_euler('z', 90, degrees=True).apply(new_v)
+
+# 多轴旋转
+new_v = R.from_euler('xyz', [90,45,0], degrees=True).apply(new_v)
+```
+
+
+```python
+import igl
+import polyscope as ps
+import numpy as np
+from scipy.spatial.transform import Rotation as R
+
+v, f = igl.read_triangle_mesh("assets/bunny.obj")
+
+# 将mesh中心点移动到原点
+new_v = v - v.mean(axis=0)
+
+# 使用旋转轴+旋转角度，对mesh进行旋转
+new_v_x = R.from_euler('x', 90, degrees=True).apply(new_v)
+new_v_y = R.from_euler('y', 90, degrees=True).apply(new_v)
+new_v_z = R.from_euler('z', 90, degrees=True).apply(new_v)
+
+# 旋转后，再加上中心点v.mean(axis=0)
+new_v_x = new_v_x + v.mean(axis=0)
+new_v_y = new_v_y + v.mean(axis=0)
+new_v_z = new_v_z + v.mean(axis=0)
+
+ps.init()
+ps.register_surface_mesh("mesh", v, f,
+                         color=np.array([0, 91, 255]) / 255,
+                         edge_width=0.03,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+
+ps.register_surface_mesh("mesh_x", new_v_x, f,
+                         color=np.array([255, 164, 0]) / 255,
+                         edge_width=0.03,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+
+ps.register_surface_mesh("mesh_y", new_v_y, f,
+                         color=np.array([255, 0, 218]) / 255,
+                         edge_width=0.03,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+ps.register_surface_mesh("mesh_z", new_v_z, f,
+                         color=np.array([0, 255, 37]) / 255,
+                         edge_width=0.03,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 这两行有用
+ps.set_shadow_blur_iters(3)  # 模糊的程度，这个数值可以设置很大
+ps.set_shadow_darkness(0.5)  # 这个数值也可以设置很大
+ps.set_up_dir("y_up")  # 这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉
+ps.set_front_dir('z_front')  # 这两行有用
+ps.set_SSAA_factor(4)
+ps.set_open_imgui_window_for_user_callback(False)  # 用于将原始imgui的界面关掉
+ps.show()
+
+```
+
+
+## 6 有用操作
+
+

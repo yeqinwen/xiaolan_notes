@@ -199,3 +199,6 @@ ps.show()
 | ![](assets/Pasted%20image%2020260915113205.png) | ![](assets/Pasted%20image%2020260915113221.png) |
 | :---------------------------------------------: | :---------------------------------------------: |
 |                 mesh+wireframe                  |                    wireframe                    |
+
+
+[garmentnets/common/potpourri3d_util.py at 4ccbe43d75e97933525410bb1a25ad617a1bbdf4 · real-stanford/garmentnets](https://github.com/real-stanford/garmentnets/blob/4ccbe43d75e97933525410bb1a25ad617a1bbdf4/common/potpourri3d_util.py#L4)

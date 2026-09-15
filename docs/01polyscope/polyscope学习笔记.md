@@ -1091,8 +1091,8 @@ ps.show()
 
 ## 7 添加量
 
-### 7.1 添加标量量add_scalar_quantity
-#### 7.1.1 给每个顶点添加标量量
+### 7.1 标量add_scalar_quantity
+#### 7.1.1 每个顶点添加标量量
 
 ```python
 import polyscope as ps
@@ -1133,7 +1133,7 @@ ps.show()
 
 
 
-#### 7.1.2 利用重心坐标给每个面添加标量量
+#### 7.1.2 每个面添加标量量
 
 
 ```python
@@ -1177,9 +1177,9 @@ ps.show()
 ![](assets/Pasted%20image%2020260915163525.png)
 
 
-### 7.2 添加颜色量add_color_quantity
+### 7.2 颜色add_color_quantity
 
-#### 7.2.1 给每个顶点添加颜色量
+#### 7.2.1 每个顶点添加颜色量
 
 ```python
 import igl
@@ -1231,7 +1231,7 @@ ps.show()
 
 
 
-#### 7.2.2 利用重心坐标给每个面添加颜色量
+#### 7.2.2 每个面添加颜色量
 
 ```python
 import polyscope as ps
@@ -1279,9 +1279,9 @@ ps.show()
 ![](assets/Pasted%20image%2020260915164231.png)
 
 
-### 7.3 添加向量量add_vector_quantity
+### 7.3 向量add_vector_quantity
 
-#### 7.3.1 在每个顶点上添加向量量
+#### 7.3.1 每个顶点上添加向量量
 
 ```python
 import numpy as np
@@ -1328,7 +1328,7 @@ ps.show()
 ![](assets/Pasted%20image%2020260915161947.png)
 
 
-#### 7.3.2 在每个面上添加向量量
+#### 7.3.2 每个面上添加向量量
 
 ```python
 import numpy as np
@@ -1373,22 +1373,271 @@ ps.show()
 
 ![](assets/Pasted%20image%2020260915162037.png)
 
-### 7.4 添加参数化量add_parameterization_quantity
+### 7.4 参数化add_parameterization_quantity
+
+#### 7.4.1 给3D服装添加参数化量
+
+```python
+import numpy as np
+import polyscope as ps
+import igl
 
 
+def visu(vertices):
+    # 将所有的顶点坐标转换成颜色值，颜色值的范围在0-1之间，归一化
+    min_coord, max_coord = np.min(vertices, axis=0, keepdims=True), np.max(vertices, axis=0, keepdims=True)
+    cmap = (vertices - min_coord) / (max_coord - min_coord)
+    return cmap
+
+
+V, F = igl.read_triangle_mesh("2_source_g.obj")
+v_2D, f_2D = igl.read_triangle_mesh("2_source_p.obj")
+
+# 对于服装来说，uv就是样板文件
+# uv的值需要在0-1的范围内，如果不在这个范围内，可视化有问题
+param_v = visu(v_2D[:, :2])
+
+ps.init()
+mesh_3D = ps.register_surface_mesh("mesh_3D", V, F)
+mesh_3D.add_parameterization_quantity("3D_para", param_v,
+                                      enabled=True,
+                                      viz_style="checker",
+                                      coords_type='unit',
+                                      checker_size=0.05,
+                                      # checker_colors=((1.0, 0, 0), (0, 0, 1.0)),
+                                      # grid_colors=((1.0, 0, 0), (0, 0, 1.0)),
+                                      )
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
+ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
+ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
+ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
+ps.set_front_dir('z_front')  # 设置z轴正方向向前
+ps.set_SSAA_factor(4)  # 在截图时，设置为4时，截图会更清晰
+ps.show()
+
+```
+
+#### 7.4.2 给样板添加参数化量
+
+```python
+import numpy as np
+import polyscope as ps
+import igl
+
+
+def visu(vertices):
+    # 将所有的顶点坐标转换成颜色值，颜色值的范围在0-1之间，归一化
+    min_coord, max_coord = np.min(vertices, axis=0, keepdims=True), np.max(vertices, axis=0, keepdims=True)
+    cmap = (vertices - min_coord) / (max_coord - min_coord)
+    return cmap
+
+
+V, F = igl.read_triangle_mesh("2_source_g.obj")
+v_2D, f_2D = igl.read_triangle_mesh("2_source_p.obj")
+
+# 对于服装来说，uv就是样板文件
+# uv的值需要在0-1的范围内，如果不在这个范围内，可视化有问题
+param_v = visu(v_2D[:, :2])
+
+ps.init()
+mesh_2D = ps.register_surface_mesh("mesh_2D", v_2D, f_2D)
+mesh_2D.add_parameterization_quantity("2D_para", param_v, enabled=True, checker_size=0.05)
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
+ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
+ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
+ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
+ps.set_front_dir('z_front')  # 设置z轴正方向向前
+ps.set_SSAA_factor(4)  # 在截图时，设置为4时，截图会更清晰
+ps.show()
+
+```
+
+
+
+| ![](assets/Pasted%20image%2020260915193804.png) | ![](assets/Pasted%20image%2020260915193823.png) |
+| :---------------------------------------------: | :---------------------------------------------: |
+|                  在3D服装上添加参数化量                   |                  在2D样板上添加参数化量                   |
+
+
+#### 7.4.3 参数量可视化设置
+
+
+![](assets/Pasted%20image%2020260915194006.png)
+
+
+```python
+add_parameterization_quantity("3D_para", param_v,
+                                      enabled=True,
+                                      viz_style="checker",
+                                      coords_type='unit',
+                                      checker_size=0.05,
+                                      # checker_colors=((1.0, 0, 0), (0, 0, 1.0)),
+                                      # grid_colors=((1.0, 0, 0), (0, 0, 1.0)),
+                                      )
+```
+
+`viz_style`参数有四种选择
+
+| ![](assets/Pasted%20image%2020260915194434.png) | ![](assets/Pasted%20image%2020260915194450.png) |
+| :---------------------------------------------: | :---------------------------------------------: |
+|                     checker                     |                      grid                       |
+| ![](assets/Pasted%20image%2020260915194502.png) | ![](assets/Pasted%20image%2020260915194513.png) |
+|                   local grid                    |                   local dist                    |
+
+
+`create_curve_network_from_seam`这个函数有什么用？
+
+![](assets/Pasted%20image%2020260915194627.png)
 
 
 
 ### 7.5 添加纹理材质量
 
+**add_scalar_quantity + defined_on='texture'**
+图像数据是标量（每个像素一个值），可视化时通过 colormap 映射成颜色。适合展示密度、温度、高度等标量场。
+
+**add_color_quantity + defined_on='texture'**
+图像数据是RGB颜色（每个像素三个值），直接显示原始颜色。适合加载真实的彩色纹理贴图。
+
+add_color_quantity的texture是一张rgb图，形状为(height,width,3) 
+
+#### 7.5.1 使用vertices法为smpl添加纹理
+
+
 ```python
-# 在给mesh添加材质时，是将材质转化为颜色信息，即可以转化为标量量，也可以转化为颜色量，所以两种方法都可以，可以借助下面两个函数来实现
+import numpy as np
+import polyscope as ps
+import trimesh
+from PIL import Image
 
-add_scalar_quantity()
+# 使用vertices方法，为smpl人体添加uv纹理贴图
+mesh = trimesh.load("smpl_uv.obj", process=False, force='mesh')
+v, f = mesh.vertices, mesh.faces
 
-add_color_quantity()
+ps.init()
+# 1、可视mesh
+ps_mesh = ps.register_surface_mesh("mesh", v, f,
+                                   color=[0, 91 / 255, 255 / 255],
+                                   edge_width=0.001,
+                                   edge_color=[1, 1, 1],
+                                   smooth_shade=True,
+                                   # material="flat"
+                                   )
+
+# 2、添加参数化 (aka UV map)
+uv = mesh.visual.uv
+print(np.min(uv), np.max(uv))  # vt的值需要在0-1的范围内，如果不在这个范围内，可视化有问题
+ps_mesh.add_parameterization_quantity("uv", uv, defined_on='vertices', enabled=True)
+
+# 3、加载纹理贴图，将纹理贴图转化为颜色量
+uv_img = Image.open('f_02_alb.002.png')
+texture = np.asarray(uv_img)
+
+texture_color = texture[:, :, :3] / 255
+# 要加这一行，mesh材质颜色才能正常显示
+# 将sRGB颜色转换为线性空间 (Polyscope默认期望线性颜色)
+texture_color = np.power(texture_color, 2.2)  # gamma校正的逆运算
+
+# 4、在mesh上添加颜色量
+ps_mesh.add_color_quantity("texture", texture_color,
+                           defined_on='texture',
+                           param_name="uv",
+                           filter_mode='nearest',
+                           enabled=True)
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
+ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
+ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
+ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
+ps.set_front_dir('z_front')  # 设置z轴正方向向前
+ps.set_SSAA_factor(4)  # 在截图时，设置为4时，截图会更清晰
+ps.show()
+
 ```
 
+打印：
+```python
+0.0073 0.995324
+```
+
+
+| ![](assets/Pasted%20image%2020260915185329.png) | ![](assets/Pasted%20image%2020260915192423.png) |
+| :---------------------------------------------: | :---------------------------------------------: |
+|          ![](assets/f_02_alb.002.png)           |          ![](assets/f_01_nrm.002.png)           |
+|                       纹理图                       |                       法线图                       |
+
+
+#### 7.5.2 使用corners法为smpl添加纹理
+
+add_color_quantity()
+
+```python
+import igl
+import numpy as np
+import polyscope as ps
+from PIL import Image
+
+# 使用corners方法，为smpl人体添加uv纹理贴图
+
+v, vt, _, f, ft, _ = igl.readOBJ("smpl_uv.obj")
+
+ps.init()
+
+# 1、可视化mesh
+ps_mesh = ps.register_surface_mesh("mesh", v, f,
+                                   color=[0, 91/255, 255/ 255],
+                                   edge_width=0.001,
+                                   edge_color=[1, 1, 1],
+                                   smooth_shade=True,
+                                   # material="flat"
+                                   )
+
+# 2、添加参数化 (aka UV map)
+uv = vt[ft.reshape(-1)]
+print(np.min(uv), np.max(uv))  # uv的值需要在0-1的范围内，如果不在这个范围内，可视化有问题
+ps_mesh.add_parameterization_quantity("uv", uv, defined_on='corners', enabled=True)
+
+# 3、加载纹理贴图，将纹理贴图转化为颜色量
+uv_img = Image.open('f_02_alb.002.png')
+uv_img = np.asarray(uv_img)
+texture_map = uv_img[:, :, :3] / 255
+# 易错的点，有些rgba图包含透明度这个通道
+# 直接使用uv_img会出错，使用uv_img[:, :, :3]更合适
+
+# 要加这一行，mesh材质颜色才能正常显示
+# 将sRGB纹理转换到线性空间（去除gamma编码）
+texture_map = np.power(texture_map, 2.2)
+
+# 4、在mesh上添加颜色量
+ps_mesh.add_color_quantity("spot_texture", texture_map,
+                           defined_on='texture',
+                           param_name="uv",
+                           filter_mode='nearest',
+                           enabled=True)
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
+ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
+ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
+ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
+ps.set_front_dir('z_front')  # 设置z轴正方向向前
+ps.set_SSAA_factor(4)  # 在截图时，设置为4时，截图会更清晰
+ps.show()
+
+```
 
 
 

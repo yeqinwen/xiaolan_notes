@@ -1,8 +1,4 @@
 
-
-[Python三维网格处理库Trimesh详解-CSDN博客](https://blog.csdn.net/weixin_42964413/article/details/151722600)
-
-
 ## 1 trimesh读写
 
 ### 1.1 trimesh 读写mesh
@@ -403,11 +399,6 @@ ps.show()
 
 
 ![](assets/Pasted%20image%2020260915151347.png)
-
-
-
-
-
 
 
 

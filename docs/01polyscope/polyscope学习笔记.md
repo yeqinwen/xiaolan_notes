@@ -1177,7 +1177,7 @@ ps.show()
 ![](assets/Pasted%20image%2020260915163525.png)
 
 
-### 6.2 添加颜色数据add_color_quantity
+### 6.2 添加颜色量add_color_quantity
 
 #### 6.2.1 给每个顶点添加颜色量
 

@@ -994,9 +994,9 @@ ps.show()
 ```
 
 
-### 5.5 法线
+## 6 法线
 
-#### 5.5.1 顶点法线
+### 6.1 顶点法线
 
 ```python
 import numpy as np
@@ -1042,7 +1042,7 @@ ps.show()
 
 ![](assets/Pasted%20image%2020260915161947.png)
 
-#### 5.5.2 面法线
+### 6.2 面法线
 
 ```python
 import numpy as np
@@ -1089,10 +1089,10 @@ ps.show()
 
 
 
-## 6 添加量
+## 7 添加量
 
-### 6.1 添加标量量add_scalar_quantity
-#### 6.1.1 给每个顶点添加标量量
+### 7.1 添加标量量add_scalar_quantity
+#### 7.1.1 给每个顶点添加标量量
 
 ```python
 import polyscope as ps
@@ -1133,7 +1133,7 @@ ps.show()
 
 
 
-#### 6.1.2 利用重心坐标给每个面添加标量量
+#### 7.1.2 利用重心坐标给每个面添加标量量
 
 
 ```python
@@ -1177,9 +1177,9 @@ ps.show()
 ![](assets/Pasted%20image%2020260915163525.png)
 
 
-### 6.2 添加颜色量add_color_quantity
+### 7.2 添加颜色量add_color_quantity
 
-#### 6.2.1 给每个顶点添加颜色量
+#### 7.2.1 给每个顶点添加颜色量
 
 ```python
 import igl
@@ -1231,7 +1231,7 @@ ps.show()
 
 
 
-#### 6.2.2 利用重心坐标给每个面添加颜色量
+#### 7.2.2 利用重心坐标给每个面添加颜色量
 
 ```python
 import polyscope as ps
@@ -1279,9 +1279,9 @@ ps.show()
 ![](assets/Pasted%20image%2020260915164231.png)
 
 
-### 6.3 添加向量量add_vector_quantity
+### 7.3 添加向量量add_vector_quantity
 
-#### 6.3.1 在每个顶点上添加向量量
+#### 7.3.1 在每个顶点上添加向量量
 
 ```python
 import numpy as np
@@ -1328,7 +1328,7 @@ ps.show()
 ![](assets/Pasted%20image%2020260915161947.png)
 
 
-#### 6.3.2 在每个面上添加向量量
+#### 7.3.2 在每个面上添加向量量
 
 ```python
 import numpy as np
@@ -1373,20 +1373,28 @@ ps.show()
 
 ![](assets/Pasted%20image%2020260915162037.png)
 
-### 6.4 添加参数化量add_parameterization_quantity
+### 7.4 添加参数化量add_parameterization_quantity
 
 
 
 
 
+### 7.5 添加纹理材质量
+
+```python
+# 在给mesh添加材质时，是将材质转化为颜色信息，即可以转化为标量量，也可以转化为颜色量，所以两种方法都可以，可以借助下面两个函数来实现
+
+add_scalar_quantity()
+
+add_color_quantity()
+```
 
 
 
 
+## 8 有用操作
 
-## 7 有用操作
-
-### 7.1 归一化mesh
+### 8.1 归一化mesh
 
 ```python
 import igl
@@ -1453,7 +1461,7 @@ ps.show()
 ![](assets/Pasted%20image%2020260915161358.png)
 
 
-### 7.2 将mesh采样为点云
+### 8.2 将mesh采样为点云
 
 ```python
 import igl
@@ -1495,7 +1503,7 @@ ps.show()
 
 ![](assets/Pasted%20image%2020260915161606.png)
 
-### 7.3 将mesh沿顶点偏移一段距离
+### 8.3 将mesh沿顶点偏移一段距离
 
 ```python
 import polyscope as ps

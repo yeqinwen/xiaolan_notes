@@ -668,7 +668,7 @@ ps.show()
 ```
 
 
-![](默认10种颜色.png)
+![](assets/默认10种颜色.png)
 
 ### 4.3 调亮10种颜色
 
@@ -723,7 +723,7 @@ ps.show()
 ```
 
 
-![](调亮10种颜色.png)
+![](assets/调亮10种颜色.png)
 
 
 ## 5 平移、缩放、旋转
@@ -770,7 +770,7 @@ ps.show()
 
 ```
 
-![](Pasted%20image%2020260915155746.png)
+![](assets/Pasted%20image%2020260915155746.png)
 
 
 ### 5.2 缩放
@@ -816,7 +816,7 @@ ps.show()
 ```
 
 
-![](Pasted%20image%2020260915155928.png)
+![](assets/Pasted%20image%2020260915155928.png)
 
 ### 5.3 矩阵旋转
 
@@ -909,9 +909,9 @@ ps.show()
 
 mesh是y轴正方向向上，z轴正方向指向屏幕外，x轴正方向向右
 
-| ![](Pasted%20image%2020260915160109.png) | ![](Pasted%20image%2020260915160120.png) | ![](Pasted%20image%2020260915160133.png) |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| 绕x轴旋转                                    | 绕y轴旋转                                    | 绕z轴旋转                                    |
+| ![](assets/Pasted%20image%2020260915160109.png) | ![](assets/Pasted%20image%2020260915160120.png) | ![](assets/Pasted%20image%2020260915160133.png) |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| 绕x轴旋转                                           | 绕y轴旋转                                           | 绕z轴旋转                                           |
 
 ### 5.4 轴角旋转
 
@@ -994,6 +994,569 @@ ps.show()
 ```
 
 
-## 6 有用操作
+### 5.5 法线
+
+#### 5.5.1 顶点法线
+
+```python
+import numpy as np
+import igl
+import polyscope as ps
+
+# igl读取模型
+v, f = igl.read_triangle_mesh("assets/bunny.obj")
+
+# 计算顶点的法向量
+vn = igl.per_vertex_normals(v, f)
+
+# 可视化mesh
+ps.init()
+ps_mesh = ps.register_surface_mesh("mesh", v, f,
+                                   color=np.array([0, 91, 255]) / 255,
+                                   edge_width=0.3,
+                                   edge_color=[1, 1, 1],
+                                   smooth_shade=True,
+                                   # material="flat"
+                                   )
+
+ps_mesh.add_vector_quantity("vertex_normal", vn,
+                            defined_on="vertices",  # 在顶点上添加法线
+                            color=(1, 0, 0),
+                            radius=0.002,
+                            length=0.03,
+                            enabled=True)
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 这两行有用
+ps.set_shadow_blur_iters(3)  # 模糊的程度，这个数值可以设置很大
+ps.set_shadow_darkness(0.5)  # 这个数值也可以设置很大
+ps.set_up_dir("y_up")  # 这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉
+ps.set_front_dir('z_front')  # z轴正方向向前
+ps.set_SSAA_factor(4)
+ps.set_open_imgui_window_for_user_callback(False)  # 用于将原始imgui的界面关掉
+ps.show()
+
+```
+
+![](assets/Pasted%20image%2020260915161947.png)
+
+#### 5.5.2 面法线
+
+```python
+import numpy as np
+import igl
+import polyscope as ps
+
+# igl读取模型
+v, f = igl.read_triangle_mesh("assets/bunny.obj")
+
+# 计算面的法向量
+fn = igl.per_face_normals(v, f, np.ones(3))
+
+ps.init()
+ps_mesh = ps.register_surface_mesh("mesh", v, f,
+                                   color=np.array([0, 91, 255]) / 255,
+                                   edge_width=0.3,
+                                   edge_color=[1, 1, 1],
+                                   smooth_shade=True,
+                                   # material="flat"
+                                   )
+
+ps_mesh.add_vector_quantity("face_normal", fn,
+                            defined_on="faces",  # 在面上添加法线
+                            color=(1, 0, 0),
+                            radius=0.002,
+                            length=0.03,
+                            enabled=True)
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 这两行有用
+ps.set_shadow_blur_iters(3)  # 模糊的程度，这个数值可以设置很大
+ps.set_shadow_darkness(0.5)  # 这个数值也可以设置很大
+ps.set_up_dir("y_up")  # 这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉
+ps.set_front_dir('z_front')  # z轴正方向向前
+ps.set_SSAA_factor(4)
+ps.set_open_imgui_window_for_user_callback(False)  # 用于将原始imgui的界面关掉
+ps.show()
+
+```
+
+![](assets/Pasted%20image%2020260915162037.png)
 
 
+
+## 6 添加量
+
+### 6.1 添加标量量add_scalar_quantity
+#### 6.1.1 给每个顶点添加标量量
+
+```python
+import polyscope as ps
+import numpy as np
+import trimesh
+
+mesh = trimesh.load_mesh("assets/bunny.obj")
+V = mesh.vertices
+F = mesh.faces
+
+ps.init()
+ps_mesh = ps.register_surface_mesh("mesh", V, F,
+                                   color=np.array([0, 91, 255]) / 255,
+                                   edge_width=0.0003,
+                                   edge_color=[1, 1, 1],
+                                   smooth_shade=True,
+                                   # material="flat"
+                                   )
+
+ps_mesh.add_scalar_quantity("scalar", V[:, 1],
+                            defined_on="vertices",
+                            cmap="jet",
+                            enabled=True)
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 这两行有用
+ps.set_shadow_blur_iters(3)  # 模糊的程度，这个数值可以设置很大
+ps.set_shadow_darkness(0.5)  # 这个数值也可以设置很大
+ps.set_up_dir("y_up")  # 这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉
+ps.set_front_dir('z_front')  # 这两行有用
+ps.set_SSAA_factor(4)
+ps.show()
+```
+
+![](assets/Pasted%20image%2020260915163004.png)
+
+
+
+#### 6.1.2 利用重心坐标给每个面添加标量量
+
+
+```python
+import polyscope as ps
+import numpy as np
+import trimesh
+import igl
+
+# igl读取模型
+V, F = igl.read_triangle_mesh("assets/bunny.obj")
+
+# 求每个面的重心坐标
+barycenter = igl.barycenter(V, F)  # (6966, 3) (6966, 3
+
+ps.init()
+ps_mesh = ps.register_surface_mesh("mesh", V, F,
+                                   color=np.array([0, 91, 255]) / 255,
+                                   edge_width=0.0003,
+                                   edge_color=[1, 1, 1],
+                                   smooth_shade=True,
+                                   # material="flat"
+                                   )
+
+ps_mesh.add_scalar_quantity("scalar", barycenter[:, 1],
+                            defined_on="faces",
+                            enabled=True, cmap="jet")
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 这两行有用
+ps.set_shadow_blur_iters(3)  # 模糊的程度，这个数值可以设置很大
+ps.set_shadow_darkness(0.5)  # 这个数值也可以设置很大
+ps.set_up_dir("y_up")  # 这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉
+ps.set_front_dir('z_front')  # 这两行有用
+ps.set_SSAA_factor(4)
+ps.show()
+
+```
+
+![](assets/Pasted%20image%2020260915163525.png)
+
+
+### 6.2 添加颜色数据add_color_quantity
+
+#### 6.2.1 给每个顶点添加颜色量
+
+```python
+import igl
+import polyscope as ps
+import numpy as np
+
+
+def visu(vertices):
+    # 将所有的顶点坐标转换成颜色值，颜色值的范围在0-1之间，归一化
+    min_coord, max_coord = np.min(vertices, axis=0, keepdims=True), np.max(vertices, axis=0, keepdims=True)
+    cmap = (vertices - min_coord) / (max_coord - min_coord)
+    return cmap
+
+
+# igl读取模型
+V, F = igl.read_triangle_mesh("assets/cat-00.off")
+
+colors = visu(V)
+
+ps.init()
+ps_mesh = ps.register_surface_mesh("mesh", V, F,
+                                   color=np.array([0, 91, 255]) / 255,
+                                   edge_width=0.0003,
+                                   edge_color=[1, 1, 1],
+                                   smooth_shade=True,
+                                   # material="flat"
+                                   )
+
+# add_color_quantity 这个函数没有cmap这个参数，因为它添加的就是颜色值，不需要再设置cmap
+ps_mesh.add_color_quantity("color", colors,
+                           defined_on="vertices",
+                           enabled=True)
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 这两行有用
+ps.set_shadow_blur_iters(3)  # 模糊的程度，这个数值可以设置很大
+ps.set_shadow_darkness(0.5)  # 这个数值也可以设置很大
+ps.set_up_dir("y_up")  # 这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉
+ps.set_front_dir('z_front')  # 这两行有用
+ps.set_SSAA_factor(4)
+ps.show()
+
+```
+
+
+![](assets/Pasted%20image%2020260915164021.png)
+
+
+
+#### 6.2.2 利用重心坐标给每个面添加颜色量
+
+```python
+import polyscope as ps
+import numpy as np
+import igl
+
+
+def visu(vertices):
+    # 将所有的顶点坐标转换成颜色值，颜色值的范围在0-1之间，归一化
+    min_coord, max_coord = np.min(vertices, axis=0, keepdims=True), np.max(vertices, axis=0, keepdims=True)
+    cmap = (vertices - min_coord) / (max_coord - min_coord)
+    return cmap
+
+
+V, F = igl.read_triangle_mesh("assets/cat-00.off")
+
+barycenter = igl.barycenter(V, F)
+colors = visu(barycenter)
+
+# ===== 2. 注册 mesh =====
+ps.init()
+ps_mesh = ps.register_surface_mesh("mesh", V, F,
+                                   color=np.array([0, 91, 255]) / 255,
+                                   edge_width=0.0003,
+                                   edge_color=[1, 1, 1],
+                                   smooth_shade=True,
+                                   # material="flat"
+                                   )
+ps_mesh.add_color_quantity("color", colors, defined_on="faces", enabled=True)
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 这两行有用
+ps.set_shadow_blur_iters(3)  # 模糊的程度，这个数值可以设置很大
+ps.set_shadow_darkness(0.5)  # 这个数值也可以设置很大
+ps.set_up_dir("y_up")  # 这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉
+ps.set_front_dir('z_front')  # 这两行有用
+ps.set_SSAA_factor(4)
+ps.show()
+
+```
+
+
+![](assets/Pasted%20image%2020260915164231.png)
+
+
+### 6.3 添加向量量add_vector_quantity
+
+#### 6.3.1 在每个顶点上添加向量量
+
+```python
+import numpy as np
+import igl
+import polyscope as ps
+
+# igl读取模型
+v, f = igl.read_triangle_mesh("assets/bunny.obj")
+
+# 计算顶点的法向量
+vn = igl.per_vertex_normals(v, f)
+
+# 可视化mesh
+ps.init()
+ps_mesh = ps.register_surface_mesh("mesh", v, f,
+                                   color=np.array([0, 91, 255]) / 255,
+                                   edge_width=0.3,
+                                   edge_color=[1, 1, 1],
+                                   smooth_shade=True,
+                                   # material="flat"
+                                   )
+
+ps_mesh.add_vector_quantity("vertex_normal", vn,
+                            defined_on="vertices",  # 在顶点上添加法线
+                            color=(1, 0, 0),
+                            radius=0.002,
+                            length=0.03,
+                            enabled=True)
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 这两行有用
+ps.set_shadow_blur_iters(3)  # 模糊的程度，这个数值可以设置很大
+ps.set_shadow_darkness(0.5)  # 这个数值也可以设置很大
+ps.set_up_dir("y_up")  # 这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉
+ps.set_front_dir('z_front')  # z轴正方向向前
+ps.set_SSAA_factor(4)
+ps.set_open_imgui_window_for_user_callback(False)  # 用于将原始imgui的界面关掉
+ps.show()
+
+```
+
+![](assets/Pasted%20image%2020260915161947.png)
+
+
+#### 6.3.2 在每个面上添加向量量
+
+```python
+import numpy as np
+import igl
+import polyscope as ps
+
+# igl读取模型
+v, f = igl.read_triangle_mesh("assets/bunny.obj")
+
+# 计算面的法向量
+fn = igl.per_face_normals(v, f, np.ones(3))
+
+ps.init()
+ps_mesh = ps.register_surface_mesh("mesh", v, f,
+                                   color=np.array([0, 91, 255]) / 255,
+                                   edge_width=0.3,
+                                   edge_color=[1, 1, 1],
+                                   smooth_shade=True,
+                                   # material="flat"
+                                   )
+
+ps_mesh.add_vector_quantity("face_normal", fn,
+                            defined_on="faces",  # 在面上添加法线
+                            color=(1, 0, 0),
+                            radius=0.002,
+                            length=0.03,
+                            enabled=True)
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 这两行有用
+ps.set_shadow_blur_iters(3)  # 模糊的程度，这个数值可以设置很大
+ps.set_shadow_darkness(0.5)  # 这个数值也可以设置很大
+ps.set_up_dir("y_up")  # 这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉
+ps.set_front_dir('z_front')  # z轴正方向向前
+ps.set_SSAA_factor(4)
+ps.set_open_imgui_window_for_user_callback(False)  # 用于将原始imgui的界面关掉
+ps.show()
+
+```
+
+![](assets/Pasted%20image%2020260915162037.png)
+
+### 6.4 添加参数化量add_parameterization_quantity
+
+
+
+
+
+
+
+
+
+
+## 7 有用操作
+
+### 7.1 归一化mesh
+
+```python
+import igl
+import polyscope as ps
+import numpy as np
+import trimesh
+
+
+def normalize_meshes(mesh):
+    # https://github.com/1zb/GeomDist/blob/master/normalize.py
+    mesh.vertices -= (mesh.vertices.max(axis=0) + mesh.vertices.min(axis=0)) / 2
+
+    scale = (1 / np.abs(mesh.vertices).max()) * 0.99
+
+    mesh.vertices *= scale
+
+    points, _ = trimesh.sample.sample_surface(mesh, 10000000)
+
+    mesh.vertices -= points.mean()
+    mesh.vertices /= points.std()
+
+    return mesh
+
+
+mesh = trimesh.load_mesh("assets/bunny.obj")
+org_v, org_f = mesh.vertices.copy(), mesh.faces.copy()
+
+org_v = org_v + np.array([3, 0, 0])  # 方便可视化
+
+# 将mesh归一化
+mesh = normalize_meshes(mesh)
+v, f = mesh.vertices, mesh.faces
+
+ps.init()
+ps.register_surface_mesh("org_mesh", org_v, org_f,
+                         color=np.array([0, 91, 255]) / 255,
+                         edge_width=0.03,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+
+ps.register_surface_mesh("mesh", v, f,
+                         color=np.array([255, 164, 0]) / 255,
+                         edge_width=0.03,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+# ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 这两行有用
+ps.set_shadow_blur_iters(3)  # 模糊的程度，这个数值可以设置很大
+ps.set_shadow_darkness(0.5)  # 这个数值也可以设置很大
+ps.set_up_dir("y_up")  # 这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉
+ps.set_front_dir('z_front')
+ps.set_SSAA_factor(4)
+ps.show()
+
+```
+
+
+![](assets/Pasted%20image%2020260915161358.png)
+
+
+### 7.2 将mesh采样为点云
+
+```python
+import igl
+import polyscope as ps
+import numpy as np
+import trimesh
+
+mesh = trimesh.load_mesh("assets/bunny.obj")
+v, f = mesh.vertices, mesh.faces
+
+v = v - np.array([0.2, 0, 0])  # 方便可视化
+
+# 在mesh上采样点，从而生成点云
+points, _ = trimesh.sample.sample_surface(mesh, 100000)
+
+ps.init()
+ps.register_surface_mesh("mesh", v, f,
+                         color=np.array([0, 91, 255]) / 255,
+                         edge_width=0.03,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+
+ps.register_point_cloud("points", points, radius=0.0015)
+
+ps.set_view_projection_mode("orthographic")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 这两行有用
+ps.set_shadow_blur_iters(3)  # 模糊的程度，这个数值可以设置很大
+ps.set_shadow_darkness(0.5)  # 这个数值也可以设置很大
+ps.set_up_dir("y_up")  # 这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉
+ps.set_front_dir('z_front')
+ps.set_SSAA_factor(4)
+ps.show()
+
+```
+
+![](assets/Pasted%20image%2020260915161606.png)
+
+### 7.3 将mesh沿顶点偏移一段距离
+
+```python
+import polyscope as ps
+import trimesh
+import numpy as np
+
+
+def offset_mesh_along_normals(input_mesh, offset_distance):
+    # 获取原始顶点和面
+    original_vertices = input_mesh.vertices.copy()
+    faces = input_mesh.faces.copy()
+
+    # 获取顶点法线（确保归一化）
+    vertex_normals = input_mesh.vertex_normals.copy()
+
+    # 沿法线方向移动顶点
+    new_vertices = original_vertices + vertex_normals * offset_distance
+
+    # 创建新网格
+    new_mesh = trimesh.Trimesh(
+        vertices=new_vertices,
+        faces=faces,
+        process=False  # 避免自动重新处理（如合并顶点）
+    )
+
+    return new_mesh
+
+
+mesh = trimesh.load_mesh("assets/torso.obj")
+
+new_mesh = offset_mesh_along_normals(mesh, -0.1)
+new_v, new_f = new_mesh.vertices, new_mesh.faces
+# new_mesh.export("new_torso.obj")
+
+ps.init()
+ps.register_surface_mesh("mesh", mesh.vertices, mesh.faces,
+                         color=np.array([0, 91, 255]) / 255,
+                         edge_width=0.3,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+ps.register_surface_mesh("new_mesh", new_v, new_f,
+                         color=np.array([255, 164, 0]) / 255,
+                         edge_width=0.3,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 这两行有用
+ps.set_shadow_blur_iters(3)  # 模糊的程度，这个数值可以设置很大
+ps.set_shadow_darkness(0.5)  # 这个数值也可以设置很大
+ps.set_up_dir("y_up")  # 这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉
+ps.set_front_dir('z_front')  # 这两行有用
+ps.set_SSAA_factor(4)
+ps.set_open_imgui_window_for_user_callback(False)  # 用于将原始imgui的界面关掉
+ps.show()
+
+```
+
+![](assets/Pasted%20image%2020260915161726.png)

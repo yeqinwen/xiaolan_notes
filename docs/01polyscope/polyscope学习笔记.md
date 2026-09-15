@@ -1421,7 +1421,7 @@ ps.show()
 
 ```
 
-#### 7.4.2 给样板添加参数化量
+#### 7.4.2 给2D样板添加参数化量
 
 ```python
 import numpy as np
@@ -1499,7 +1499,7 @@ add_parameterization_quantity("3D_para", param_v,
 
 
 
-### 7.5 添加纹理材质量
+### 7.5 纹理贴图
 
 **add_scalar_quantity + defined_on='texture'**
 图像数据是标量（每个像素一个值），可视化时通过 colormap 映射成颜色。适合展示密度、温度、高度等标量场。

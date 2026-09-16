@@ -1,7 +1,4 @@
 
-我的测试
-添加两行
-
 
 ## 1 polyscope常用可视化
 ### 1.1 可视化mesh
@@ -116,9 +113,140 @@ ps.show()
 |                 mesh+wireframe                  |                    wireframe                    |
 
 
-## 2 读写mesh
 
-### 2.1 python读写mesh
+## 2 polyscope颜色设置
+
+### 2.1 调亮颜色
+
+```python
+蓝色[0, 91/255, 255/ 255]   
+黄色[255/ 255, 164/ 255, 0]   
+粉红色[255/ 255, 0, 218/ 255]   
+青色[0, 255/ 255, 37/ 255]  
+紫色[100/ 255, 0, 255/ 255] 
+草黄[155/ 255, 255/ 255, 0] 
+红色[255/ 255, 0, 27/ 255] 
+玉色[0, 255/ 255, 228/ 255] 
+深蓝[5/ 255, 0, 255/ 255]
+亮黄[255/ 255, 255/ 255, 0] 
+```
+
+
+### 2.2 默认10种颜色
+
+如果不设置颜色，使用的就是默认颜色，默认的颜色有一点暗
+
+```python
+import igl
+import numpy as np
+import polyscope as ps
+
+v, f = igl.read_triangle_mesh("assets/dress2.obj")
+
+ps.init()
+ps.register_surface_mesh("mesh1", v, f,
+                         # color=np.array([0, 91, 255]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh2", v + np.array([1000, 0, 0]), f,
+                         # color=np.array([255,164,0] ) /255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh3", v + np.array([2000, 0, 0]), f,
+                         # color=np.array([255, 0, 218]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh4", v + np.array([3000, 0, 0]), f,
+                         # color=np.array([0, 255, 37]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh5", v + np.array([4000, 0, 0]), f,
+                         # color=np.array([100, 0, 255]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh6", v + np.array([5000, 0, 0]), f,
+                         # color=np.array([155, 255, 0]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh7", v + np.array([6000, 0, 0]), f,
+                         # color=np.array([255, 0, 27]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh8", v + np.array([7000, 0, 0]), f,
+                         # color=np.array([0, 255, 228]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh9", v + np.array([8000, 0, 0]), f,
+                         # color=np.array([5, 0, 255]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh10", v + np.array([9000, 0, 0]), f,
+                         # color=np.array([255, 255, 0]) / 255,
+                         smooth_shade=True)
+
+ps.set_ground_plane_mode("shadow_only")
+# ps.set_navigation_style("planar")
+ps.set_up_dir("y_up")
+ps.set_view_projection_mode("orthographic")  # orthographic 正交投影   perspective 透视投影
+ps.set_SSAA_factor(4)
+ps.show()
+```
+
+
+![](assets/默认10种颜色.png)
+
+### 2.3 调亮10种颜色
+
+```python
+import igl
+import numpy as np
+import polyscope as ps
+
+v, f = igl.read_triangle_mesh("assets/dress2.obj")
+
+# 调亮
+# 蓝色 [0,91,255] / 255# 黄色 [255,164,0] / 255# 粉红色 [255,0, 218 ] / 255# 青色 [0,255,37] / 255# 紫色 [100, 0, 255]/ 255# 草黄 [155,255,0] / 255# 红色 [255,0,27] / 255# 玉色 [0,255,228] / 255# 深蓝 [5,0,255] / 255# 亮黄 [255,255,0] / 255
+
+ps.init()
+ps.register_surface_mesh("mesh1", v, f,
+                         color=np.array([0, 91, 255]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh2", v + np.array([1000, 0, 0]), f,
+                         color=np.array([255, 164, 0]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh3", v + np.array([2000, 0, 0]), f,
+                         color=np.array([255, 0, 218]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh4", v + np.array([3000, 0, 0]), f,
+                         color=np.array([0, 255, 37]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh5", v + np.array([4000, 0, 0]), f,
+                         color=np.array([100, 0, 255]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh6", v + np.array([5000, 0, 0]), f,
+                         color=np.array([155, 255, 0]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh7", v + np.array([6000, 0, 0]), f,
+                         color=np.array([255, 0, 27]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh8", v + np.array([7000, 0, 0]), f,
+                         color=np.array([0, 255, 228]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh9", v + np.array([8000, 0, 0]), f,
+                         color=np.array([5, 0, 255]) / 255,
+                         smooth_shade=True)
+ps.register_surface_mesh("mesh10", v + np.array([9000, 0, 0]), f,
+                         color=np.array([255, 255, 0]) / 255,
+                         smooth_shade=True)
+
+ps.set_ground_plane_mode("shadow_only")
+# ps.set_navigation_style("planar")
+ps.set_up_dir("y_up")
+ps.set_view_projection_mode("orthographic")  # orthographic 正交投影   perspective 透视投影
+ps.set_SSAA_factor(4)
+ps.show()
+```
+
+
+![](assets/调亮10种颜色.png)
+
+
+
+
+## 3 读写mesh
+
+### 3.1 python读写mesh
 
 ```python
 import polyscope as ps
@@ -193,7 +321,7 @@ ps.show()
 save_obj("assets/new_bunny_python.obj",v,f)
 ```
 
-### 2.2 libigl读写mesh
+### 3.2 libigl读写mesh
 
 ```python
 import igl
@@ -229,7 +357,7 @@ igl.write_triangle_mesh("assets/new_bunny_igl.obj", v, f)
 
 ```
 
-### 2.3 trimesh读写mesh
+### 3.3 trimesh读写mesh
 
 ```python
 import trimesh
@@ -267,7 +395,7 @@ mesh.export("assets/new_bunny_trimesh.obj")
 
 ```
 
-### 2.4 openmesh读写mesh
+### 3.4 openmesh读写mesh
 
 ```python
 import openmesh as om
@@ -304,7 +432,7 @@ ps.show()
 om.write_mesh("assets/new_bunny_openmesh.obj", mesh)
 ```
 
-### 2.5 pymeshlab读写mesh
+### 3.5 pymeshlab读写mesh
 
 ```python
 import pymeshlab
@@ -348,7 +476,7 @@ ps.show()
 ms.save_current_mesh("assets/new_bunny_pymeshlab.obj") # 不知道为什么会报错
 ```
 
-### 2.6 gpytoolbox读写mesh
+### 3.6 gpytoolbox读写mesh
 
 ```python
 import gpytoolbox as gpy
@@ -383,355 +511,12 @@ ps.show()
 gpy.write_mesh("assets/new_bunny_gpytoolbox.obj",v,f)
 ```
 
-## 3 视角设置
 
-### 3.1 初始可视化
 
-```python
-import igl
-import polyscope as ps
-import numpy as np
-import json
 
-V, F = igl.read_triangle_mesh("assets/bunny.obj")
-print(V.shape,F.shape)
+## 4 平移、缩放、旋转
 
-ps.init()
-ps.register_surface_mesh("mesh", V, F,
-                         color=np.array([0, 91, 255]) / 255,
-                         edge_width=0.3,
-                         edge_color=[1, 1, 1],
-                         smooth_shade=True,
-                         # material="flat"
-                         )
-
-ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
-# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
-ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
-# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
-ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
-ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
-ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
-ps.set_front_dir('z_front')  # 设置z轴正方向向前
-ps.set_SSAA_factor(4) # 在截图时，设置为4时，截图会更清晰
-ps.show()
-```
-
-![](assets/Pasted%20image%2020260902215855.png)
-
-### 3.2 获取视角参数
-
-在可视化时，可以旋转mesh到合适的视角，然后将该视角参数保存为json文件，下次可视化时加载json参数设置视角即可
-
-```python
-import igl
-import polyscope as ps
-import numpy as np
-import json
-
-V, F = igl.read_triangle_mesh("assets/bunny.obj")
-print(V.shape,F.shape)
-
-ps.init()
-ps.register_surface_mesh("mesh", V, F,
-                         color=np.array([0, 91, 255]) / 255,
-                         edge_width=0.3,
-                         edge_color=[1, 1, 1],
-                         smooth_shade=True,
-                         # material="flat"
-                         )
-
-ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
-# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
-ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
-# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
-ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
-ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
-ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
-ps.set_front_dir('z_front')  # 设置z轴正方向向前
-ps.set_SSAA_factor(4) # 在截图时，设置为4时，截图会更清晰
-ps.show()
-
-
-# 获得视图参数，并写入json
-my_view = ps.get_view_as_json()
-with open('my_view.json', "w") as fp:
-    json.dump(my_view, fp, indent=4, ensure_ascii=False)
-
-```
-
-![](assets/Pasted%20image%2020260902220102.png)
-
-### 3.3 加载保存的视角参数
-
-```python
-import igl
-import polyscope as ps
-import numpy as np
-import json
-
-V, F = igl.read_triangle_mesh("assets/bunny.obj")
-print(V.shape,F.shape)
-
-# 读取视图json文件
-with open('my_view.json') as fin:
-    my_view = json.load(fin)
-
-ps.init()
-ps.set_view_from_json(my_view)
-ps.register_surface_mesh("mesh", V, F,
-                         color=np.array([0, 91, 255]) / 255,
-                         edge_width=0.3,
-                         edge_color=[1, 1, 1],
-                         smooth_shade=True,
-                         # material="flat"
-                         )
-
-ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
-# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
-ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
-# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
-ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
-ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
-ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
-ps.set_front_dir('z_front')  # 设置z轴正方向向前
-ps.set_SSAA_factor(4) # 在截图时，设置为4时，截图会更清晰
-ps.show()
-
-```
-
-![](assets/Pasted%20image%2020260902220229.png)
-
-
-### 3.4 直接设置视角参数
-
-在代码内部直接设置视角参数，无需加载json文件
-
-```python
-import igl
-import polyscope as ps
-import numpy as np
-
-V, F = igl.read_triangle_mesh("assets/bunny.obj")
-print(V.shape, F.shape)
-
-my_view = ("{\"farClipRatio\":20.0,\"fov\":45.0,\"nearClipRatio\":0.005,"
-           "\"projectionMode\":\"Perspective\","
-           "\"viewMat\":[0.628925979137421,-0.0,0.777465164661407,0.0164333805441856,"
-           "0.477299362421036,0.78937029838562,-0.386108577251434,-0.0585889630019665,"
-           "-0.613707959651947,0.613917350769043,0.496455520391464,-0.391957879066467,"
-           "0.0,0.0,0.0,1.0],"
-           "\"windowHeight\":720,\"windowWidth\":1280}")
-
-ps.init()
-ps.set_view_from_json(my_view)
-ps.register_surface_mesh("mesh", V, F,
-                         color=np.array([0, 91, 255]) / 255,
-                         edge_width=0.3,
-                         edge_color=[1, 1, 1],
-                         smooth_shade=True,
-                         # material="flat"
-                         )
-
-ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
-# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
-ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
-# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
-ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
-ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
-ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
-ps.set_front_dir('z_front')  # 设置z轴正方向向前
-ps.set_SSAA_factor(4) # 在截图时，设置为4时，截图会更清晰
-ps.show()
-```
-
-![](assets/Pasted%20image%2020260902221432.png)
-
-
-### 3.5 常用视角
-
-常用的视角有：常用窗口、方形窗口、全屏窗口
-
-**注意**：直接设置视角参数时，因为在 `my_view`视角参数里面已经设置了“透视投影”或“正交投影“，所以在代码里面就不要再设置了，`ps.set_view_projection_mode("perspective")`这一行要注释掉！
-
-```python
-
-# 常用窗口
-my_view = ("{\"farClipRatio\":20.0,"
-           "\"fov\":39.9119839509077,"
-           "\"nearClipRatio\":0.005,"
-           "\"projectionMode\":\"Orthographic\","
-           "\"viewMat\":[0.905055642127991,-4.65661287307739e-10,0.425295770168304,0.0160223785787821,"
-           "0.148309409618378,0.937226414680481,-0.315611660480499,-0.0960772186517715,"
-           "-0.398598343133926,0.348720252513885,0.848241686820984,-0.358562052249908,"
-           "0.0,0.0,0.0,1.0],"
-           "\"windowHeight\":801,"
-           "\"windowWidth\":1293}")
-
-# 方形窗口
-my_view = ("{\"farClipRatio\":20.0,"
-           "\"fov\":35.0,"
-           "\"nearClipRatio\":0.005,"
-           "\"projectionMode\":\"Orthographic\","
-           "\"viewMat\":[1.0,-0.0,0.0,0.0168603006750345,"
-           "0.0,0.997785151004791,-0.066519021987915,-0.110035300254822,"
-           "-0.0,0.066519021987915,0.997785151004791,-0.320515900850296,"
-           "0.0,0.0,0.0,1.0],"
-           "\"windowHeight\":600,"
-           "\"windowWidth\":600}")
-           
-# 全屏窗口
-my_view = ("{\"farClipRatio\":20.0,"
-           "\"fov\":38.7801126847704,"
-           "\"nearClipRatio\":0.005,"
-           "\"projectionMode\":\"Orthographic\","
-           "\"viewMat\":[0.992455244064331,2.91038304567337e-11,0.122607305645943,0.0192149728536606,"
-           "0.0536937303841114,0.899007201194763,-0.434628546237946,-0.0625064224004745,"
-           "-0.110224828124046,0.437932759523392,0.892224311828613,-0.363460153341293,"
-           "0.0,0.0,0.0,1.0],"
-           "\"windowHeight\":1055,"
-           "\"windowWidth\":1920}")
-
-```
-
-
-| 常用窗口 |    ![](assets/Pasted%20image%2020260902220915.png)    |
-| :--: | :---------------------------------------------------: |
-| 方形窗口 |    ![](assets/Pasted%20image%2020260902220724.png)    |
-| 全屏窗口 |    ![](assets/Pasted%20image%2020260902221033.png)    |
-|      | # ps.set_view_projection_mode("perspective") 这一行要 注释掉 |
-
-## 4 颜色设置
-
-### 4.1 颜色
-
-```python
-蓝色[0, 91/255, 255/ 255]   
-黄色[255/ 255, 164/ 255, 0]   
-粉红色[255/ 255, 0, 218/ 255]   
-青色[0, 255/ 255, 37/ 255]  
-紫色[100/ 255, 0, 255/ 255] 
-草黄[155/ 255, 255/ 255, 0] 
-红色[255/ 255, 0, 27/ 255] 
-玉色[0, 255/ 255, 228/ 255] 
-深蓝[5/ 255, 0, 255/ 255]
-亮黄[255/ 255, 255/ 255, 0] 
-```
-
-
-### 4.2 默认10种颜色
-
-如果不设置颜色，使用的就是默认颜色，默认的颜色有一点暗
-
-```python
-import igl
-import numpy as np
-import polyscope as ps
-
-v, f = igl.read_triangle_mesh("assets/dress2.obj")
-
-ps.init()
-ps.register_surface_mesh("mesh1", v, f,
-                         # color=np.array([0, 91, 255]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh2", v + np.array([1000, 0, 0]), f,
-                         # color=np.array([255,164,0] ) /255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh3", v + np.array([2000, 0, 0]), f,
-                         # color=np.array([255, 0, 218]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh4", v + np.array([3000, 0, 0]), f,
-                         # color=np.array([0, 255, 37]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh5", v + np.array([4000, 0, 0]), f,
-                         # color=np.array([100, 0, 255]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh6", v + np.array([5000, 0, 0]), f,
-                         # color=np.array([155, 255, 0]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh7", v + np.array([6000, 0, 0]), f,
-                         # color=np.array([255, 0, 27]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh8", v + np.array([7000, 0, 0]), f,
-                         # color=np.array([0, 255, 228]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh9", v + np.array([8000, 0, 0]), f,
-                         # color=np.array([5, 0, 255]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh10", v + np.array([9000, 0, 0]), f,
-                         # color=np.array([255, 255, 0]) / 255,
-                         smooth_shade=True)
-
-ps.set_ground_plane_mode("shadow_only")
-# ps.set_navigation_style("planar")
-ps.set_up_dir("y_up")
-ps.set_view_projection_mode("orthographic")  # orthographic 正交投影   perspective 透视投影
-ps.set_SSAA_factor(4)
-ps.show()
-```
-
-
-![](assets/默认10种颜色.png)
-
-### 4.3 调亮10种颜色
-
-```python
-import igl
-import numpy as np
-import polyscope as ps
-
-v, f = igl.read_triangle_mesh("assets/dress2.obj")
-
-# 调亮
-# 蓝色 [0,91,255] / 255# 黄色 [255,164,0] / 255# 粉红色 [255,0, 218 ] / 255# 青色 [0,255,37] / 255# 紫色 [100, 0, 255]/ 255# 草黄 [155,255,0] / 255# 红色 [255,0,27] / 255# 玉色 [0,255,228] / 255# 深蓝 [5,0,255] / 255# 亮黄 [255,255,0] / 255
-
-ps.init()
-ps.register_surface_mesh("mesh1", v, f,
-                         color=np.array([0, 91, 255]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh2", v + np.array([1000, 0, 0]), f,
-                         color=np.array([255, 164, 0]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh3", v + np.array([2000, 0, 0]), f,
-                         color=np.array([255, 0, 218]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh4", v + np.array([3000, 0, 0]), f,
-                         color=np.array([0, 255, 37]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh5", v + np.array([4000, 0, 0]), f,
-                         color=np.array([100, 0, 255]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh6", v + np.array([5000, 0, 0]), f,
-                         color=np.array([155, 255, 0]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh7", v + np.array([6000, 0, 0]), f,
-                         color=np.array([255, 0, 27]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh8", v + np.array([7000, 0, 0]), f,
-                         color=np.array([0, 255, 228]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh9", v + np.array([8000, 0, 0]), f,
-                         color=np.array([5, 0, 255]) / 255,
-                         smooth_shade=True)
-ps.register_surface_mesh("mesh10", v + np.array([9000, 0, 0]), f,
-                         color=np.array([255, 255, 0]) / 255,
-                         smooth_shade=True)
-
-ps.set_ground_plane_mode("shadow_only")
-# ps.set_navigation_style("planar")
-ps.set_up_dir("y_up")
-ps.set_view_projection_mode("orthographic")  # orthographic 正交投影   perspective 透视投影
-ps.set_SSAA_factor(4)
-ps.show()
-```
-
-
-![](assets/调亮10种颜色.png)
-
-
-## 5 平移、缩放、旋转
-
-### 5.1 平移
+### 4.1 平移
 
 ```python
 import igl
@@ -776,7 +561,7 @@ ps.show()
 ![](assets/Pasted%20image%2020260915155746.png)
 
 
-### 5.2 缩放
+### 4.2 缩放
 
 ```python
 import igl
@@ -821,7 +606,7 @@ ps.show()
 
 ![](assets/Pasted%20image%2020260915155928.png)
 
-### 5.3 矩阵旋转
+### 4.3 矩阵旋转
 
 
 ```python
@@ -916,7 +701,7 @@ mesh是y轴正方向向上，z轴正方向指向屏幕外，x轴正方向向右
 | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
 | 绕x轴旋转                                           | 绕y轴旋转                                           | 绕z轴旋转                                           |
 
-### 5.4 轴角旋转
+### 4.4 轴角旋转
 
 ```python
 
@@ -997,9 +782,9 @@ ps.show()
 ```
 
 
-## 6 法线
+## 5 法线
 
-### 6.1 顶点法线
+### 5.1 顶点法线
 
 ```python
 import numpy as np
@@ -1045,7 +830,7 @@ ps.show()
 
 ![](assets/Pasted%20image%2020260915161947.png)
 
-### 6.2 面法线
+### 5.2 面法线
 
 ```python
 import numpy as np
@@ -1092,10 +877,254 @@ ps.show()
 
 
 
-## 7 添加量
 
-### 7.1 标量add_scalar_quantity
-#### 7.1.1 每个顶点添加标量量
+## 6 项目选项Program Options
+
+
+## 7 场景选项Scene Options
+
+
+## 8 管理视角Managing Views
+### 8.1 初始可视化
+
+```python
+import igl
+import polyscope as ps
+import numpy as np
+import json
+
+V, F = igl.read_triangle_mesh("assets/bunny.obj")
+print(V.shape,F.shape)
+
+ps.init()
+ps.register_surface_mesh("mesh", V, F,
+                         color=np.array([0, 91, 255]) / 255,
+                         edge_width=0.3,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
+ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
+ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
+ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
+ps.set_front_dir('z_front')  # 设置z轴正方向向前
+ps.set_SSAA_factor(4) # 在截图时，设置为4时，截图会更清晰
+ps.show()
+```
+
+![](assets/Pasted%20image%2020260902215855.png)
+
+### 8.2 获取视角参数
+
+在可视化时，可以旋转mesh到合适的视角，然后将该视角参数保存为json文件，下次可视化时加载json参数设置视角即可
+
+```python
+import igl
+import polyscope as ps
+import numpy as np
+import json
+
+V, F = igl.read_triangle_mesh("assets/bunny.obj")
+print(V.shape,F.shape)
+
+ps.init()
+ps.register_surface_mesh("mesh", V, F,
+                         color=np.array([0, 91, 255]) / 255,
+                         edge_width=0.3,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
+ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
+ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
+ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
+ps.set_front_dir('z_front')  # 设置z轴正方向向前
+ps.set_SSAA_factor(4) # 在截图时，设置为4时，截图会更清晰
+ps.show()
+
+
+# 获得视图参数，并写入json
+my_view = ps.get_view_as_json()
+with open('my_view.json', "w") as fp:
+    json.dump(my_view, fp, indent=4, ensure_ascii=False)
+
+```
+
+![](assets/Pasted%20image%2020260902220102.png)
+
+### 8.3 加载保存的视角参数
+
+```python
+import igl
+import polyscope as ps
+import numpy as np
+import json
+
+V, F = igl.read_triangle_mesh("assets/bunny.obj")
+print(V.shape,F.shape)
+
+# 读取视图json文件
+with open('my_view.json') as fin:
+    my_view = json.load(fin)
+
+ps.init()
+ps.set_view_from_json(my_view)
+ps.register_surface_mesh("mesh", V, F,
+                         color=np.array([0, 91, 255]) / 255,
+                         edge_width=0.3,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
+ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
+ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
+ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
+ps.set_front_dir('z_front')  # 设置z轴正方向向前
+ps.set_SSAA_factor(4) # 在截图时，设置为4时，截图会更清晰
+ps.show()
+
+```
+
+![](assets/Pasted%20image%2020260902220229.png)
+
+
+### 8.4 直接设置视角参数
+
+在代码内部直接设置视角参数，无需加载json文件
+
+```python
+import igl
+import polyscope as ps
+import numpy as np
+
+V, F = igl.read_triangle_mesh("assets/bunny.obj")
+print(V.shape, F.shape)
+
+my_view = ("{\"farClipRatio\":20.0,\"fov\":45.0,\"nearClipRatio\":0.005,"
+           "\"projectionMode\":\"Perspective\","
+           "\"viewMat\":[0.628925979137421,-0.0,0.777465164661407,0.0164333805441856,"
+           "0.477299362421036,0.78937029838562,-0.386108577251434,-0.0585889630019665,"
+           "-0.613707959651947,0.613917350769043,0.496455520391464,-0.391957879066467,"
+           "0.0,0.0,0.0,1.0],"
+           "\"windowHeight\":720,\"windowWidth\":1280}")
+
+ps.init()
+ps.set_view_from_json(my_view)
+ps.register_surface_mesh("mesh", V, F,
+                         color=np.array([0, 91, 255]) / 255,
+                         edge_width=0.3,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
+ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
+ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
+ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
+ps.set_front_dir('z_front')  # 设置z轴正方向向前
+ps.set_SSAA_factor(4) # 在截图时，设置为4时，截图会更清晰
+ps.show()
+```
+
+![](assets/Pasted%20image%2020260902221432.png)
+
+
+### 8.5 常用视角
+
+常用的视角有：常用窗口、方形窗口、全屏窗口
+
+**注意**：直接设置视角参数时，因为在 `my_view`视角参数里面已经设置了“透视投影”或“正交投影“，所以在代码里面就不要再设置了，`ps.set_view_projection_mode("perspective")`这一行要注释掉！
+
+```python
+
+# 常用窗口
+my_view = ("{\"farClipRatio\":20.0,"
+           "\"fov\":39.9119839509077,"
+           "\"nearClipRatio\":0.005,"
+           "\"projectionMode\":\"Orthographic\","
+           "\"viewMat\":[0.905055642127991,-4.65661287307739e-10,0.425295770168304,0.0160223785787821,"
+           "0.148309409618378,0.937226414680481,-0.315611660480499,-0.0960772186517715,"
+           "-0.398598343133926,0.348720252513885,0.848241686820984,-0.358562052249908,"
+           "0.0,0.0,0.0,1.0],"
+           "\"windowHeight\":801,"
+           "\"windowWidth\":1293}")
+
+# 方形窗口
+my_view = ("{\"farClipRatio\":20.0,"
+           "\"fov\":35.0,"
+           "\"nearClipRatio\":0.005,"
+           "\"projectionMode\":\"Orthographic\","
+           "\"viewMat\":[1.0,-0.0,0.0,0.0168603006750345,"
+           "0.0,0.997785151004791,-0.066519021987915,-0.110035300254822,"
+           "-0.0,0.066519021987915,0.997785151004791,-0.320515900850296,"
+           "0.0,0.0,0.0,1.0],"
+           "\"windowHeight\":600,"
+           "\"windowWidth\":600}")
+           
+# 全屏窗口
+my_view = ("{\"farClipRatio\":20.0,"
+           "\"fov\":38.7801126847704,"
+           "\"nearClipRatio\":0.005,"
+           "\"projectionMode\":\"Orthographic\","
+           "\"viewMat\":[0.992455244064331,2.91038304567337e-11,0.122607305645943,0.0192149728536606,"
+           "0.0536937303841114,0.899007201194763,-0.434628546237946,-0.0625064224004745,"
+           "-0.110224828124046,0.437932759523392,0.892224311828613,-0.363460153341293,"
+           "0.0,0.0,0.0,1.0],"
+           "\"windowHeight\":1055,"
+           "\"windowWidth\":1920}")
+
+```
+
+
+| 常用窗口 |    ![](assets/Pasted%20image%2020260902220915.png)    |
+| :--: | :---------------------------------------------------: |
+| 方形窗口 |    ![](assets/Pasted%20image%2020260902220724.png)    |
+| 全屏窗口 |    ![](assets/Pasted%20image%2020260902221033.png)    |
+|      | # ps.set_view_projection_mode("perspective") 这一行要 注释掉 |
+
+
+## 9 管理相机Managing Camera
+
+
+
+## 10 动画 Animation
+### 10.1 循环动画
+
+### 10.2 frame_trick动画
+
+### 10.3 Callback交互式动画
+
+
+
+## 11 交互式界面Interactive UIs
+
+
+
+
+
+## 12 polyscope添加量
+
+### 12.1 标量add_scalar_quantity
+#### 12.1.1 每个顶点添加标量量
 
 ```python
 import polyscope as ps
@@ -1136,7 +1165,7 @@ ps.show()
 
 
 
-#### 7.1.2 每个面添加标量量
+#### 12.1.2 每个面添加标量量
 
 
 ```python
@@ -1180,9 +1209,9 @@ ps.show()
 ![](assets/Pasted%20image%2020260915163525.png)
 
 
-### 7.2 颜色add_color_quantity
+### 12.2 颜色add_color_quantity
 
-#### 7.2.1 每个顶点添加颜色量
+#### 12.2.1 每个顶点添加颜色量
 
 ```python
 import igl
@@ -1234,7 +1263,7 @@ ps.show()
 
 
 
-#### 7.2.2 每个面添加颜色量
+#### 12.2.2 每个面添加颜色量
 
 ```python
 import polyscope as ps
@@ -1282,9 +1311,9 @@ ps.show()
 ![](assets/Pasted%20image%2020260915164231.png)
 
 
-### 7.3 向量add_vector_quantity
+### 12.3 向量add_vector_quantity
 
-#### 7.3.1 每个顶点上添加向量量
+#### 12.3.1 每个顶点上添加向量量
 
 ```python
 import numpy as np
@@ -1331,7 +1360,7 @@ ps.show()
 ![](assets/Pasted%20image%2020260915161947.png)
 
 
-#### 7.3.2 每个面上添加向量量
+#### 12.3.2 每个面上添加向量量
 
 ```python
 import numpy as np
@@ -1376,9 +1405,9 @@ ps.show()
 
 ![](assets/Pasted%20image%2020260915162037.png)
 
-### 7.4 参数化add_parameterization_quantity
+### 12.4 参数化add_parameterization_quantity
 
-#### 7.4.1 给3D服装添加参数化量
+#### 12.4.1 给3D服装添加参数化量
 
 ```python
 import numpy as np
@@ -1424,7 +1453,7 @@ ps.show()
 
 ```
 
-#### 7.4.2 给2D样板添加参数化量
+#### 12.4.2 给2D样板添加参数化量
 
 ```python
 import numpy as np
@@ -1470,7 +1499,7 @@ ps.show()
 |                  在3D服装上添加参数化量                   |                  在2D样板上添加参数化量                   |
 
 
-#### 7.4.3 参数量可视化设置
+#### 12.4.3 参数量可视化设置
 
 
 ![](assets/Pasted%20image%2020260915194006.png)
@@ -1502,7 +1531,7 @@ add_parameterization_quantity("3D_para", param_v,
 
 
 
-### 7.5 纹理贴图
+### 12.5 纹理贴图
 
 **add_scalar_quantity + defined_on='texture'**
 图像数据是标量（每个像素一个值），可视化时通过 colormap 映射成颜色。适合展示密度、温度、高度等标量场。
@@ -1512,7 +1541,7 @@ add_parameterization_quantity("3D_para", param_v,
 
 add_color_quantity的texture是一张rgb图，形状为(height,width,3) 
 
-#### 7.5.1 使用vertices法为smpl添加纹理
+#### 12.5.1 使用vertices法为smpl添加纹理
 
 ```
 smpl_uv.obj和f_02_alb.002.png是在SMPL官方网站上下载的
@@ -1587,7 +1616,7 @@ ps.show()
 |                       纹理图                       |                       法线图                       |
 
 
-#### 7.5.2 使用corners法为smpl添加纹理
+#### 12.5.2 使用corners法为smpl添加纹理
 
 add_color_quantity()
 
@@ -1649,10 +1678,13 @@ ps.show()
 ```
 
 
+## 13 polyscope的Color Maps
 
-## 8 有用操作
 
-### 8.1 归一化mesh
+
+## 14 有用操作
+
+### 14.1 归一化mesh
 
 ```python
 import igl
@@ -1719,7 +1751,7 @@ ps.show()
 ![](assets/Pasted%20image%2020260915161358.png)
 
 
-### 8.2 将mesh采样为点云
+### 14.2 将mesh采样为点云
 
 ```python
 import igl
@@ -1761,7 +1793,7 @@ ps.show()
 
 ![](assets/Pasted%20image%2020260915161606.png)
 
-### 8.3 将mesh沿顶点偏移一段距离
+### 14.3 将mesh沿顶点偏移一段距离
 
 ```python
 import polyscope as ps

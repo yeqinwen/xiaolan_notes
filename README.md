@@ -2,11 +2,17 @@
 
 [小蓝笔记网站](https://yeqinwen.github.io/xiaolan_notes/)，使用[MkDocs template](https://github.com/jobindjohn/obsidian-publish-mkdocs)构建，笔记网页保存在[github](https://github.com/yeqinwen/xiaolan_notes)
 
-obsidian+github+MkDocs
 
-1. obsidian记笔记
-2. 使用git插件同步到github
-3. 使用MkDocs将github项目发布为网页
+1. obsidian：记笔记
+2. github desktop：将笔记同步到github
+3. github：保存笔记文件
+4. MkDocs：将笔记发布为网页
+
+
+# obsidian插件
+1. Number Headings：自动标题
+2. floating toc：浮动目录
+3. code styler：方便保存、显示和复制代码
 
 
 # 注意

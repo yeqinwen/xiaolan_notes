@@ -878,13 +878,13 @@ ps.show()
 
 
 
-## 6 项目选项Program Options
+## 6 polyscope项目选项
 
 
-## 7 场景选项Scene Options
+## 7 polyscope场景选项
 
 
-## 8 管理视角Managing Views
+## 8 polyscope管理视角
 ### 8.1 初始可视化
 
 ```python
@@ -1102,29 +1102,17 @@ my_view = ("{\"farClipRatio\":20.0,"
 |      | # ps.set_view_projection_mode("perspective") 这一行要 注释掉 |
 
 
-## 9 管理相机Managing Camera
-
-
-
-## 10 动画 Animation
-### 10.1 循环动画
-
-### 10.2 frame_trick动画
-
-### 10.3 Callback交互式动画
-
-
-
-## 11 交互式界面Interactive UIs
+## 9 polyscope管理相机
 
 
 
 
 
-## 12 polyscope添加量
 
-### 12.1 标量add_scalar_quantity
-#### 12.1.1 每个顶点添加标量量
+## 10 polyscope添加量
+
+### 10.1 标量add_scalar_quantity
+#### 10.1.1 每个顶点添加标量量
 
 ```python
 import polyscope as ps
@@ -1165,7 +1153,7 @@ ps.show()
 
 
 
-#### 12.1.2 每个面添加标量量
+#### 10.1.2 每个面添加标量量
 
 
 ```python
@@ -1209,9 +1197,9 @@ ps.show()
 ![](assets/Pasted%20image%2020260915163525.png)
 
 
-### 12.2 颜色add_color_quantity
+### 10.2 颜色add_color_quantity
 
-#### 12.2.1 每个顶点添加颜色量
+#### 10.2.1 每个顶点添加颜色量
 
 ```python
 import igl
@@ -1263,7 +1251,7 @@ ps.show()
 
 
 
-#### 12.2.2 每个面添加颜色量
+#### 10.2.2 每个面添加颜色量
 
 ```python
 import polyscope as ps
@@ -1311,9 +1299,9 @@ ps.show()
 ![](assets/Pasted%20image%2020260915164231.png)
 
 
-### 12.3 向量add_vector_quantity
+### 10.3 向量add_vector_quantity
 
-#### 12.3.1 每个顶点上添加向量量
+#### 10.3.1 每个顶点上添加向量量
 
 ```python
 import numpy as np
@@ -1360,7 +1348,7 @@ ps.show()
 ![](assets/Pasted%20image%2020260915161947.png)
 
 
-#### 12.3.2 每个面上添加向量量
+#### 10.3.2 每个面上添加向量量
 
 ```python
 import numpy as np
@@ -1405,9 +1393,9 @@ ps.show()
 
 ![](assets/Pasted%20image%2020260915162037.png)
 
-### 12.4 参数化add_parameterization_quantity
+### 10.4 参数化add_parameterization_quantity
 
-#### 12.4.1 给3D服装添加参数化量
+#### 10.4.1 给3D服装添加参数化量
 
 ```python
 import numpy as np
@@ -1453,7 +1441,7 @@ ps.show()
 
 ```
 
-#### 12.4.2 给2D样板添加参数化量
+#### 10.4.2 给2D样板添加参数化量
 
 ```python
 import numpy as np
@@ -1499,7 +1487,7 @@ ps.show()
 |                  在3D服装上添加参数化量                   |                  在2D样板上添加参数化量                   |
 
 
-#### 12.4.3 参数量可视化设置
+#### 10.4.3 参数量可视化设置
 
 
 ![](assets/Pasted%20image%2020260915194006.png)
@@ -1531,7 +1519,7 @@ add_parameterization_quantity("3D_para", param_v,
 
 
 
-### 12.5 纹理贴图
+### 10.5 纹理贴图
 
 **add_scalar_quantity + defined_on='texture'**
 图像数据是标量（每个像素一个值），可视化时通过 colormap 映射成颜色。适合展示密度、温度、高度等标量场。
@@ -1541,7 +1529,7 @@ add_parameterization_quantity("3D_para", param_v,
 
 add_color_quantity的texture是一张rgb图，形状为(height,width,3) 
 
-#### 12.5.1 使用vertices法为smpl添加纹理
+#### 10.5.1 使用vertices法为smpl添加纹理
 
 ```
 smpl_uv.obj和f_02_alb.002.png是在SMPL官方网站上下载的
@@ -1616,7 +1604,7 @@ ps.show()
 |                       纹理图                       |                       法线图                       |
 
 
-#### 12.5.2 使用corners法为smpl添加纹理
+#### 10.5.2 使用corners法为smpl添加纹理
 
 add_color_quantity()
 
@@ -1678,13 +1666,31 @@ ps.show()
 ```
 
 
-## 13 polyscope的Color Maps
+## 11 polyscope的Color Maps
+
+
+## 12 polyscope可视化uv
 
 
 
-## 14 有用操作
 
-### 14.1 归一化mesh
+## 13 polyscope动画
+### 13.1 循环动画
+
+### 13.2 frame_trick动画
+
+### 13.3 Callback交互式动画
+
+
+
+## 14 polyscope交互式GUI
+
+
+
+
+## 15 有用mesh操作
+
+### 15.1 归一化mesh
 
 ```python
 import igl
@@ -1751,7 +1757,7 @@ ps.show()
 ![](assets/Pasted%20image%2020260915161358.png)
 
 
-### 14.2 将mesh采样为点云
+### 15.2 将mesh采样为点云
 
 ```python
 import igl
@@ -1793,7 +1799,7 @@ ps.show()
 
 ![](assets/Pasted%20image%2020260915161606.png)
 
-### 14.3 将mesh沿顶点偏移一段距离
+### 15.3 将mesh沿顶点偏移一段距离
 
 ```python
 import polyscope as ps

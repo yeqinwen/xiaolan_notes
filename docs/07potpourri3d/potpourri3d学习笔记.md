@@ -1,4 +1,6 @@
 
+https://github.com/nmwsharp/potpourri3d
+
 ## 1 读写网格和点云
 
 ### 1.1 读写网格
@@ -202,3 +204,272 @@ ps.show()
 
 
 [garmentnets/common/potpourri3d_util.py at 4ccbe43d75e97933525410bb1a25ad617a1bbdf4 · real-stanford/garmentnets](https://github.com/real-stanford/garmentnets/blob/4ccbe43d75e97933525410bb1a25ad617a1bbdf4/common/potpourri3d_util.py#L4)
+
+## 3 测地距离
+### 3.1 求两点测量距离
+
+```python
+import potpourri3d as pp3d
+import numpy as np
+import trimesh
+import polyscope as ps
+
+# 读取mesh
+path = "bunny.obj"
+mesh = trimesh.load_mesh(path)
+V, F = mesh.vertices, mesh.faces
+
+path_solver = pp3d.EdgeFlipGeodesicSolver(V, F)
+
+point_a_id = 540
+point_b_id = 760
+path_pts = path_solver.find_geodesic_path(v_start=point_a_id, v_end=point_b_id)
+
+length = np.sum(np.linalg.norm(np.diff(path_pts, axis=0), axis=1))
+print(length)
+
+n = len(path_pts)
+edges = np.array([[i, i + 1] for i in range(n - 1)])
+
+ps.init()
+ps_mesh = ps.register_surface_mesh("mesh",
+                                   V, F,
+                                   color=np.array([0, 91, 255]) / 255,
+                                   edge_width=0.3,
+                                   edge_color=[1, 1, 1],
+                                   smooth_shade=True,
+                                   # transparency=0.2
+                                   # material="flat"
+                                   )
+r = 0.01
+ps.register_point_cloud("point_a", V[point_a_id].reshape(-1, 3), radius=r, color=[255 / 255, 164 / 255, 0])
+ps.register_point_cloud("point_b", V[point_b_id].reshape(-1, 3), radius=r, color=[0, 255 / 255, 37 / 255])
+
+ps.register_curve_network(
+    "Geodesic_Path", path_pts, edges,
+    color=[255 / 255, 0, 218 / 255],
+    radius=0.004,
+)
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
+ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
+ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
+ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
+ps.set_front_dir('z_front')  # 设置z轴正方向向前
+ps.set_SSAA_factor(4)  # 在截图时，设置为4时，截图会更清晰
+ps.show()
+
+```
+
+![](Pasted%20image%2020260921191757.png)
+
+
+### 3.2 求点集测地距离矩阵
+
+```python
+import numpy as np
+import potpourri3d as pp3d
+
+
+def geodesic_matrix(verts, faces, vert_idxs):
+    # https://github.com/real-stanford/garmentnets/blob/4ccbe43d75e97933525410bb1a25ad617a1bbdf4/common/potpourri3d_util.py#L4
+    """
+    Pair-wise geodesic distance between all vertecies
+    """
+    solver = pp3d.MeshHeatMethodDistanceSolver(verts, faces)
+    length = len(vert_idxs)
+    result_mat = np.zeros((length, length))
+    for i, vert_idx in enumerate(vert_idxs):
+        all_dists = solver.compute_distance(vert_idx)
+        result_mat[i] = all_dists[vert_idxs]
+    return result_mat
+
+# 求多个点的热测地距离矩阵
+V, F = pp3d.read_mesh("bunny.obj")
+print(V.shape, F.shape)
+
+result_mat = geodesic_matrix(V, F, [1, 2, 3])
+print(result_mat)
+```
+
+
+
+
+### 3.3 测地追踪
+
+不太理解这个测地追踪是什么意思：从一个顶点出发，沿某一方向一直走下去，直到不能再走了？为什么不能继续往下走了？
+
+```python
+import potpourri3d as pp3d
+import numpy as np
+import polyscope as ps
+
+# 读取mesh
+V, F = pp3d.read_mesh("bunny.obj")
+
+tracer = pp3d.GeodesicTracer(V, F)  # shares precomputation for repeated traces
+
+start_p_id = 525
+trace_pts = tracer.trace_geodesic_from_vertex(start_p_id, np.array((0.3, 0.5, 0.4)))
+
+n = len(trace_pts)
+edges = np.array([[i, i + 1] for i in range(n - 1)])
+
+ps.init()
+ps_mesh = ps.register_surface_mesh("mesh",
+                                   V, F,
+                                   color=np.array([0, 91, 255]) / 255,
+                                   edge_width=0.3,
+                                   edge_color=[1, 1, 1],
+                                   smooth_shade=True,
+                                   # transparency=0.2
+                                   # material="flat"
+                                   )
+
+ps.register_point_cloud("start_p", V[start_p_id].reshape(-1, 3),
+                        color=[255 / 255, 164 / 255, 0],
+                        radius=0.01)
+
+ps.register_curve_network(
+    "Geodesic_trace", trace_pts, edges,
+    color=[1.0, 0.2, 0.2],
+    radius=0.004,
+)
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
+ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
+ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
+ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
+ps.set_front_dir('z_front')  # 设置z轴正方向向前
+ps.set_SSAA_factor(4)  # 在截图时，设置为4时，截图会更清晰
+ps.show()
+
+```
+
+![](Pasted%20image%2020260921192037.png)
+
+
+## 4 测地热距离
+
+### 4.1 可视化某点热方法测地距离场
+
+```python
+import numpy as np
+import trimesh
+import potpourri3d as pp3d
+import polyscope as ps
+
+V, F = pp3d.read_mesh("bunny.obj")
+
+source = 478
+# Heat Method计算测地距离
+solver = pp3d.MeshHeatMethodDistanceSolver(V, F)
+
+# 从source到所有顶点的距离
+distance_field = solver.compute_distance(source)
+
+ps.init()
+ps_mesh = ps.register_surface_mesh("mesh",
+                                   V, F,
+                                   color=np.array([0, 91, 255]) / 255,
+                                   edge_width=0.003,
+                                   edge_color=[1, 1, 1],
+                                   smooth_shade=True,
+                                   # transparency=0.2
+                                   # material="flat"
+                                   )
+
+ps_mesh.add_scalar_quantity("heat distance", distance_field,
+                            defined_on="vertices",
+                            cmap="viridis",
+                            enabled=True,  # 显示标量量
+                            isolines_enabled=True  # 显示等值线
+                            )
+
+r = 0.01
+ps.register_point_cloud("source_p", V[[source]], radius=r, color=[255 / 255, 164 / 255, 0])
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
+ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
+ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
+ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
+ps.set_front_dir('z_front')  # 设置z轴正方向向前
+ps.set_SSAA_factor(4)  # 在截图时，设置为4时，截图会更清晰
+ps.show()
+
+```
+
+![](Pasted%20image%2020260921194941.png)
+
+### 4.2 求两点的热方法测地距离
+
+```python
+import numpy as np
+import trimesh
+import potpourri3d as pp3d
+import polyscope as ps
+
+V, F = pp3d.read_mesh("bunny.obj")
+
+source = 478
+# Heat Method计算测地距离
+solver = pp3d.MeshHeatMethodDistanceSolver(V, F)
+
+# 从source到所有顶点的距离
+distance_field = solver.compute_distance(source)
+
+# 根据这个距离场，就可以直接得到source点到其他点的距离
+target = 802
+source_2_target_distan = distance_field[target]
+print(source_2_target_distan)
+
+ps.init()
+ps_mesh = ps.register_surface_mesh("mesh",
+                                   V, F,
+                                   color=np.array([0, 91, 255]) / 255,
+                                   edge_width=0.003,
+                                   edge_color=[1, 1, 1],
+                                   smooth_shade=True,
+                                   # transparency=0.2
+                                   # material="flat"
+                                   )
+
+ps_mesh.add_scalar_quantity("heat distance", distance_field,
+                            defined_on="vertices",
+                            cmap="viridis",
+                            enabled=True,  # 显示标量量
+                            isolines_enabled=True  # 显示等值线
+                            )
+
+r = 0.01
+ps.register_point_cloud("source_p", V[[source]], radius=r, color=[255 / 255, 164 / 255, 0])
+ps.register_point_cloud("target_p", V[[target]], radius=r, color=[0, 255 / 255, 37 / 255])
+
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
+ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
+ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
+ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
+ps.set_front_dir('z_front')  # 设置z轴正方向向前
+ps.set_SSAA_factor(4)  # 在截图时，设置为4时，截图会更清晰
+ps.show()
+
+```
+
+打印：
+```python
+0.05445324146208293
+```
+
+![](Pasted%20image%2020260921195938.png)

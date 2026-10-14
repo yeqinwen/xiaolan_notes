@@ -892,6 +892,8 @@ ps_plane.set_pose([0, 0, 0], [1, 0, 0])
 ps_plane.set_draw_plane(True)  # render the semi-transparent gridded plane  
 ps_plane.set_draw_widget(True)
 ps_plane.set_enabled(False) # 不勾选切面
+ps_plane.set_color([1,0,0]) # 设置平面颜色
+ps_plane.set_transparency(1) # 默认是0.5半透明，1是不透明
 ```
 
 参数说明
@@ -918,14 +920,79 @@ plane2.set_enabled(False) # 不勾选切面
 ```
 
 
+```python
+from star.pytorch.star import STAR
+import numpy as np
+import torch
+import polyscope as ps
 
-|        |                                          |
-| ------ | ---------------------------------------- |
-| 切平面1   | ![](Pasted%20image%2020261014083135.png) |
-| 切平面2   | ![](Pasted%20image%2020261014083456.png) |
-| 切平面1+2 | ![](Pasted%20image%2020261014083424.png) |
+np.set_printoptions(suppress=True)
+
+batch_size = 1
+num_betas = 300  # 设置使用多少个主成分10 20 300
+poses = torch.cuda.FloatTensor(np.zeros((batch_size, 72)))
+betas = torch.cuda.FloatTensor(np.zeros((batch_size, num_betas)))
+trans = torch.cuda.FloatTensor(np.zeros((batch_size, 3)))
+
+star = STAR(gender='female', num_betas=num_betas)
+model = star.forward(poses, betas, trans)
+v = model[0].cpu().numpy()
+f = model.f.astype("int32")
+
+ps.init()
+ps.register_surface_mesh("mesh", v, f,
+                         color=np.array([0, 91, 255]) / 255,
+                         edge_width=0.3,
+                         edge_color=[1, 1, 1],
+                         smooth_shade=True,
+                         # material="flat"
+                         )
+
+plane1 = ps.add_scene_slice_plane()
+plane1.set_pose((0, 0, 0), (0, -1, 0))  # 通过法线控制切割保留的部分
+plane1.set_draw_plane(True)
+plane1.set_draw_widget(True)
+plane1.set_enabled(False)
+
+plane2 = ps.add_scene_slice_plane()
+plane2.set_pose((0, -0.2, 0), (0, 1, 0))
+plane2.set_draw_plane(True)
+plane2.set_draw_widget(True)
+plane2.set_enabled(True)
+plane2.set_color([1,0,0])
+plane2.set_transparency(1) # 默认是0.5半透明，1是不透明
 
 
+# ps.set_build_gui(False)
+ps.set_window_size(1200, 800)
+ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
+# ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
+ps.set_ground_plane_mode("tile_reflection")  # ['none','tile','tile_reflection','shadow_only']
+# ps.set_ground_plane_height(-0.001)  # 设置地平面高度
+ps.set_shadow_blur_iters(3)  # 设置地平面阴影模糊程度
+ps.set_shadow_darkness(0.5)  # 设置地平面阴影明暗程度
+ps.set_up_dir("y_up")  # 设置y轴正方向向上（这个和设置视角会冲突，因此在添加视角参数时，这一行要注释掉）
+ps.set_front_dir('z_front')  # 设置z轴正方向向前
+ps.set_SSAA_factor(4)  # 在截图时，设置为4时，截图会更清晰
+ps.show()
+```
+
+
+
+|        |                                                 |
+| ------ | ----------------------------------------------- |
+| 切平面1   | ![](assets/Pasted%20image%2020261014083135.png) |
+| 切平面2   | ![](assets/Pasted%20image%2020261014083456.png) |
+| 切平面1+2 | ![](assets/Pasted%20image%2020261014083424.png) |
+
+
+
+
+|  plane2.set_enabled(True) # 设置可见性  | ![](assets/Pasted%20image%2020261014085609.png) |
+| :--------------------------------: | :---------------------------------------------: |
+|  plane2.set_color([1,0,0]) # 设置颜色  | ![](assets/Pasted%20image%2020261014085535.png) |
+| plane2.set_transparency(1) # 1是不透明 | ![](assets/Pasted%20image%2020261014090211.png) |
+|                                    |                                                 |
 
 
 

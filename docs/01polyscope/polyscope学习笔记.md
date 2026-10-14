@@ -18,6 +18,8 @@ ps.register_surface_mesh("mesh", v,f,
                          # material="flat"
                          )
 
+# ps.set_build_gui(False)  
+ps.set_window_size(1200,800)
 ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
 # ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
 ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
@@ -48,6 +50,8 @@ ps.register_point_cloud("points", points,
                         color=np.array([0, 91, 255]) / 255,
                         radius=0.003)
 
+# ps.set_build_gui(False)  
+ps.set_window_size(1200,800)
 ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
 # ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
 ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
@@ -94,6 +98,8 @@ ps.register_curve_network("wireframe", nodes, edges,
                           radius=0.001
                           )
 
+# ps.set_build_gui(False)  
+ps.set_window_size(1200,800)
 ps.set_view_projection_mode("perspective")  # orthographic 正交投影   perspective 透视投影
 # ps.set_navigation_style("planar")  # ['turntable','free','planar','none','first_person']
 ps.set_ground_plane_mode("shadow_only")  # ['none','tile','tile_reflection','shadow_only']
@@ -881,6 +887,16 @@ ps.show()
 
 
 ## 7 polyscope场景选项
+### 7.1 设置场景背景颜色 
+
+默认背景颜色是白色 [1, 1, 1] 
+
+| ps.set_background_color([234/255,234/255,242/255]) | ps.set_background_color([0, 148 / 255, 133 / 255]) |
+| -------------------------------------------------- | -------------------------------------------------- |
+| ![](assets/Pasted%20image%2020261014091208.png)    | ![](assets/Pasted%20image%2020261014091600.png)    |
+
+
+
 
 
 ## 8 切平面

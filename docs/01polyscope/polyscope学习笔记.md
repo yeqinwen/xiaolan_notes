@@ -883,8 +883,56 @@ ps.show()
 ## 7 polyscope场景选项
 
 
-## 8 polyscope管理视角
-### 8.1 初始可视化
+## 8 切平面
+### 8.1 添加切平面方法
+添加切平面
+```python
+ps_plane = ps.add_scene_slice_plane()  
+ps_plane.set_pose([0, 0, 0], [1, 0, 0])  
+ps_plane.set_draw_plane(True)  # render the semi-transparent gridded plane  
+ps_plane.set_draw_widget(True)
+ps_plane.set_enabled(False) # 不勾选切面
+```
+
+参数说明
+```python
+ps_plane.set_pose(plane_position, plane_normal）
+ps_plane.set_pose([0, 0, 0], [1, 0, 0])
+第1个参数是位置（控制切平面的位置）
+第2个参数是法线（控制切割后保留的部分）
+```
+
+添加两个切平面
+```python
+plane1 = ps.add_scene_slice_plane()  
+plane1.set_pose((0, 0, 0), (0, -1, 0))  # 通过法线控制切割保留的部分
+plane1.set_draw_plane(True)  
+plane1.set_draw_widget(True)  
+  
+  
+plane2 = ps.add_scene_slice_plane()  
+plane2.set_pose((0, -0.2, 0), (0, 1, 0))  
+plane2.set_draw_plane(True)  
+plane2.set_draw_widget(True)  
+plane2.set_enabled(False) # 不勾选切面
+```
+
+
+
+|        |                                          |
+| ------ | ---------------------------------------- |
+| 切平面1   | ![](Pasted%20image%2020261014083135.png) |
+| 切平面2   | ![](Pasted%20image%2020261014083456.png) |
+| 切平面1+2 | ![](Pasted%20image%2020261014083424.png) |
+
+
+
+
+
+
+
+## 9 polyscope管理视角
+### 9.1 初始可视化
 
 ```python
 import igl
@@ -918,7 +966,7 @@ ps.show()
 
 ![](assets/Pasted%20image%2020260902215855.png)
 
-### 8.2 获取视角参数
+### 9.2 获取视角参数
 
 在可视化时，可以旋转mesh到合适的视角，然后将该视角参数保存为json文件，下次可视化时加载json参数设置视角即可
 
@@ -961,7 +1009,7 @@ with open('my_view.json', "w") as fp:
 
 ![](assets/Pasted%20image%2020260902220102.png)
 
-### 8.3 加载保存的视角参数
+### 9.3 加载保存的视角参数
 
 ```python
 import igl
@@ -1002,7 +1050,7 @@ ps.show()
 ![](assets/Pasted%20image%2020260902220229.png)
 
 
-### 8.4 直接设置视角参数
+### 9.4 直接设置视角参数
 
 在代码内部直接设置视角参数，无需加载json文件
 
@@ -1047,7 +1095,7 @@ ps.show()
 ![](assets/Pasted%20image%2020260902221432.png)
 
 
-### 8.5 常用视角
+### 9.5 常用视角
 
 常用的视角有：常用窗口、方形窗口、全屏窗口
 
@@ -1101,17 +1149,17 @@ my_view = ("{\"farClipRatio\":20.0,"
 |      | # ps.set_view_projection_mode("perspective") 这一行要 注释掉 |
 
 
-## 9 polyscope管理相机
+## 10 polyscope管理相机
 
 
 
 
 
 
-## 10 polyscope添加量
+## 11 polyscope添加量
 
-### 10.1 标量add_scalar_quantity
-#### 10.1.1 每个顶点添加标量量
+### 11.1 标量add_scalar_quantity
+#### 11.1.1 每个顶点添加标量量
 
 ```python
 import polyscope as ps
@@ -1152,7 +1200,7 @@ ps.show()
 
 
 
-#### 10.1.2 每个面添加标量量
+#### 11.1.2 每个面添加标量量
 
 
 ```python
@@ -1196,9 +1244,9 @@ ps.show()
 ![](assets/Pasted%20image%2020260915163525.png)
 
 
-### 10.2 颜色add_color_quantity
+### 11.2 颜色add_color_quantity
 
-#### 10.2.1 每个顶点添加颜色量
+#### 11.2.1 每个顶点添加颜色量
 
 ```python
 import igl
@@ -1250,7 +1298,7 @@ ps.show()
 
 
 
-#### 10.2.2 每个面添加颜色量
+#### 11.2.2 每个面添加颜色量
 
 ```python
 import polyscope as ps
@@ -1298,9 +1346,9 @@ ps.show()
 ![](assets/Pasted%20image%2020260915164231.png)
 
 
-### 10.3 向量add_vector_quantity
+### 11.3 向量add_vector_quantity
 
-#### 10.3.1 每个顶点上添加向量量
+#### 11.3.1 每个顶点上添加向量量
 
 ```python
 import numpy as np
@@ -1347,7 +1395,7 @@ ps.show()
 ![](assets/Pasted%20image%2020260915161947.png)
 
 
-#### 10.3.2 每个面上添加向量量
+#### 11.3.2 每个面上添加向量量
 
 ```python
 import numpy as np
@@ -1392,9 +1440,9 @@ ps.show()
 
 ![](assets/Pasted%20image%2020260915162037.png)
 
-### 10.4 参数化add_parameterization_quantity
+### 11.4 参数化add_parameterization_quantity
 
-#### 10.4.1 给3D服装添加参数化量
+#### 11.4.1 给3D服装添加参数化量
 
 ```python
 import numpy as np
@@ -1440,7 +1488,7 @@ ps.show()
 
 ```
 
-#### 10.4.2 给2D样板添加参数化量
+#### 11.4.2 给2D样板添加参数化量
 
 ```python
 import numpy as np
@@ -1486,7 +1534,7 @@ ps.show()
 |                  在3D服装上添加参数化量                   |                  在2D样板上添加参数化量                   |
 
 
-#### 10.4.3 参数量可视化设置
+#### 11.4.3 参数量可视化设置
 
 
 ![](assets/Pasted%20image%2020260915194006.png)
@@ -1518,7 +1566,7 @@ add_parameterization_quantity("3D_para", param_v,
 
 
 
-### 10.5 纹理贴图
+### 11.5 纹理贴图
 
 **add_scalar_quantity + defined_on='texture'**
 图像数据是标量（每个像素一个值），可视化时通过 colormap 映射成颜色。适合展示密度、温度、高度等标量场。
@@ -1528,7 +1576,7 @@ add_parameterization_quantity("3D_para", param_v,
 
 add_color_quantity的texture是一张rgb图，形状为(height,width,3) 
 
-#### 10.5.1 使用vertices法为smpl添加纹理
+#### 11.5.1 使用vertices法为smpl添加纹理
 
 ```
 smpl_uv.obj和f_02_alb.002.png是在SMPL官方网站上下载的
@@ -1603,7 +1651,7 @@ ps.show()
 |                       纹理图                       |                       法线图                       |
 
 
-#### 10.5.2 使用corners法为smpl添加纹理
+#### 11.5.2 使用corners法为smpl添加纹理
 
 add_color_quantity()
 
@@ -1665,31 +1713,31 @@ ps.show()
 ```
 
 
-## 11 polyscope的Color Maps
+## 12 polyscope的Color Maps
 
 
-## 12 polyscope可视化uv
-
-
-
-
-## 13 polyscope动画
-### 13.1 循环动画
-
-### 13.2 frame_trick动画
-
-### 13.3 Callback交互式动画
-
-
-
-## 14 polyscope交互式GUI
+## 13 polyscope可视化uv
 
 
 
 
-## 15 有用mesh操作
+## 14 polyscope动画
+### 14.1 循环动画
 
-### 15.1 归一化mesh
+### 14.2 frame_trick动画
+
+### 14.3 Callback交互式动画
+
+
+
+## 15 polyscope交互式GUI
+
+
+
+
+## 16 有用mesh操作
+
+### 16.1 归一化mesh
 
 ```python
 import igl
@@ -1756,7 +1804,7 @@ ps.show()
 ![](assets/Pasted%20image%2020260915161358.png)
 
 
-### 15.2 将mesh采样为点云
+### 16.2 将mesh采样为点云
 
 ```python
 import igl
@@ -1798,7 +1846,7 @@ ps.show()
 
 ![](assets/Pasted%20image%2020260915161606.png)
 
-### 15.3 将mesh沿顶点偏移一段距离
+### 16.3 将mesh沿顶点偏移一段距离
 
 ```python
 import polyscope as ps

@@ -905,17 +905,11 @@ ps.show()
 ```python
 ps_plane = ps.add_scene_slice_plane()  
 ps_plane.set_pose([0, 0, 0], [1, 0, 0])  
-ps_plane.set_draw_plane(True)  # render the semi-transparent gridded plane  
-ps_plane.set_draw_widget(True)
-ps_plane.set_enabled(False) # 不勾选切面
-ps_plane.set_color([1,0,0]) # 设置平面颜色
-ps_plane.set_transparency(1) # 默认是0.5半透明，1是不透明
 ```
 
 参数说明
 ```python
 ps_plane.set_pose(plane_position, plane_normal）
-ps_plane.set_pose([0, 0, 0], [1, 0, 0])
 第1个参数是位置（控制切平面的位置）
 第2个参数是法线（控制切割后保留的部分）
 ```
@@ -933,6 +927,12 @@ plane2.set_pose((0, -0.2, 0), (0, 1, 0))
 plane2.set_draw_plane(True)  
 plane2.set_draw_widget(True)  
 plane2.set_enabled(False) # 不勾选切面
+
+
+# 如果两个切面的法线都一样，例如都为(0, 1, 0)，都为上，则只保留一个平面的切割效果
+
+# 如果两个切平面的法线不一样，例如(0, -1, 0)，(0, 1, 0)，下，上，两个方向相交，保留相交的区域
+
 ```
 
 
@@ -1002,7 +1002,14 @@ ps.show()
 | 切平面1+2 | ![](assets/Pasted%20image%2020261014083424.png) |
 
 
-
+### 8.2 切平面参数设置
+```python
+ps_plane.set_draw_plane(True)  # render the semi-transparent gridded plane  
+ps_plane.set_draw_widget(True)
+ps_plane.set_enabled(False) # 不勾选切面
+ps_plane.set_color([1,0,0]) # 设置平面颜色
+ps_plane.set_transparency(1) # 默认是0.5半透明，1是不透明
+```
 
 |  plane2.set_enabled(True) # 设置可见性  | ![](assets/Pasted%20image%2020261014085609.png) |
 | :--------------------------------: | :---------------------------------------------: |
